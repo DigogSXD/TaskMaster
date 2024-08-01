@@ -1,4 +1,4 @@
-## TaskMaste
+## TaskMaster
 
 <!-- Título centralizado -->
 <div align="center">
