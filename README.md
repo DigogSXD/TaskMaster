@@ -10,7 +10,7 @@
   <h2>🎯 Objetivo </h2>
 </div> 
 
-• A aplicação tem como objetivo fornecer uma interface em que o usuário pode ordenar suas obrigações em ordem de prioridade. Ao cadastrar uma nova atividade, o usuário deve atribuir uma pontuação que pode ser 1,3,5,8 e 13 em relação à Importância(13 é a mais importante e 1 a menos importante) e à Facilidade(1 é a atividade mais difícil e 13 a mais fácil). Dessa forma, uma atividade muito importante(nível 13) e uma muito fácil(nível 13) deve ser realizada primeiro. O app mede o grau de importância multiplicando o nível de facilidade e de importância, sendo o resultado mais alto dessa multiplicação, a atividade com maior prioridade.
+• A aplicação visa fornecer uma interface onde o usuário pode priorizar suas tarefas. Ao cadastrar uma nova atividade, o usuário atribui uma pontuação de 1, 3, 5, 8 ou 13 para Importância (13 é a mais importante e 1 a menos importante) e Facilidade (1 é a mais difícil e 13 a mais fácil). Uma atividade com pontuação 13 em ambos os critérios deve ser realizada primeiro. A prioridade é calculada multiplicando os níveis de Facilidade e Importância, sendo a atividade com o maior resultado a de maior prioridade.
 
 <!-- Título centralizado -->
 <div align="center">
