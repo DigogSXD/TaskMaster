@@ -4,6 +4,7 @@
 <p align="justify">
 O projeto TaskMaster, está sendo desenvolvido por Diogo e Jonas, da disciplina Projeto Integrador I, do CEUB, no semestre 2024.2. 
 </p>
+
 ## Ideia
 <p align="justify">
 JONAS ESCREVE AQUI O A SUA ideia ----------------------------------------------------------
