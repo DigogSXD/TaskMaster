@@ -1,7 +1,7 @@
 site_name: TaskMaster
 
 repo_name: "TaskMaster"
-repo_url: "https://github.com/DigogSXD/TaskMaster"
+repo_url: "https://github.com/DigogSXD/TaskMaster/doc"
 
 theme:
   name: material
