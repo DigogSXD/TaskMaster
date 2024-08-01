@@ -26,15 +26,15 @@ git clone https://github.com/DigogSXD/TaskMaster.git
 <table style="margin-left: auto; margin-right: auto;">
 <tr>
         <td align="center">
-      <a href="https://github.com/alanagabriele">
+      <a href="https://github.com/digogsxd">
         <img style="border-radius: 50%;" src="https://github.com/digogsxd.png" width="150px;"/>
-        <h5 class="text-center">Alana Gabriele</h5>
+        <h5 class="text-center">Diogo Borges</h5>
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/gustaallves">
+      <a href="https://github.com/JonasMelo21">
         <img style="border-radius: 50%;" src="https://github.com/JonasMelo21.png" width="150px;"/>
-        <h5 class="text-center">Gustavo Alves</h5>
+        <h5 class="text-center">Jonas</h5>
       </a>
     </td>
   
