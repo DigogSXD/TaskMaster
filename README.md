@@ -24,5 +24,5 @@ git clone
 
 | matrícula | nome | foto |
 | -------- | -------- | -------- |
-| 211031575 | Diogo Borges de Moura|<img src="https://github.com/DigogSXD" height="75" width="75"> |
+| 211031575 | Diogo Borges de Moura|<img src="https://github.com/DigogSXD.png" height="75" width="75"> |
 | Seu RA | Jonas | <img src="https://github.com/JonasMelo21.png" height="75" width="75"> |
