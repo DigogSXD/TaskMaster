@@ -20,9 +20,24 @@ A documentação pode ser consultada <a href="" target="_blank" rel="external">A
 git clone https://github.com/DigogSXD/TaskMaster.git
 ```
 
-## Membros da Equipe
+## Equipe do Projeto
 
-| matrícula | nome | foto |
-| -------- | -------- | -------- |
-| 211031575 | Diogo Borges de Moura|<img src="https://github.com/DigogSXD.png" height="75" width="75"> |
-| Seu RA | Jonas | <img src="https://github.com/JonasMelo21.png" height="75" width="75"> |
+<center>
+<table style="margin-left: auto; margin-right: auto;">
+<tr>
+        <td align="center">
+      <a href="https://github.com/alanagabriele">
+        <img style="border-radius: 50%;" src="https://github.com/alanagabriele.png" width="150px;"/>
+        <h5 class="text-center">Alana Gabriele</h5>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/gustaallves">
+        <img style="border-radius: 50%;" src="https://github.com/gustaallves.png" width="150px;"/>
+        <h5 class="text-center">Gustavo Alves</h5>
+      </a>
+    </td>
+  
+</table>
+
+</center>
