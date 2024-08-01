@@ -1,4 +1,6 @@
-# TaskMaster
+<div align="center">
+  <h2>TaskMaster </h2>
+</div> 
 
 <!-- Título centralizado -->
 <div align="center">
