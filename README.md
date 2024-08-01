@@ -17,7 +17,7 @@ A documentação pode ser consultada <a href="" target="_blank" rel="external">A
 
 ## Instalação
 ```bash
-git clone 
+git clone https://github.com/DigogSXD/TaskMaster.git
 ```
 
 ## Membros da Equipe
