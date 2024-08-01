@@ -24,7 +24,7 @@ Os cancelamentos repentinos causam frustrações e perdas de tempo para ambos os
     </div>
     <div>
         <a href="https://github.com/Raphides">
-                <img style="border-radius: 50%;" src="https://github.com/Raphides.png" width="120px;"/>
+                <img style="border-radius: 50%;" src="https://github.com/.png" width="120px;"/>
                 <h5 class="text-center">Raphael Mendes da Silva</h5>
         </a>
     </div>
