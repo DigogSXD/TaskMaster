@@ -10,7 +10,7 @@
   <h2>🎯 Objetivo </h2>
 </div> 
 
-• Escreva aqui
+• Escreva aqui a Sua ideia
 
 <!-- Título centralizado -->
 <div align="center">
