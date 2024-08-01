@@ -27,13 +27,13 @@ git clone https://github.com/DigogSXD/TaskMaster.git
 <tr>
         <td align="center">
       <a href="https://github.com/digogsxd">
-        <img style="border-radius: 50%;" src="https://github.com/digogsxd.png" width="150px;"/>
+        <img style="border-radius: 50%;" src="https://github.com/digogsxd.png" width="100px;"/>
         <h5 class="text-center">Diogo Borges</h5>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/JonasMelo21">
-        <img style="border-radius: 50%;" src="https://github.com/JonasMelo21.png" width="150px;"/>
+        <img style="border-radius: 50%;" src="https://github.com/JonasMelo21.png" width="100px;"/>
         <h5 class="text-center">Jonas</h5>
       </a>
     </td>
