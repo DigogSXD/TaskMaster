@@ -80,10 +80,6 @@ Vamos começar clonando um repositório do GitHub em um diretório local atravé
 git clone https://github.com/DigogSXD/TaskMaster.git
 ```
   	
-  
-<div align="center">
-  <h2>⚙️ Configurações do projeto </h2>
-</div>
 • Certifique-se de ter o Python instalado. O codigo foi desenvolvido em Python.
 
 
