@@ -33,7 +33,7 @@ git clone https://github.com/DigogSXD/TaskMaster.git
     </td>
     <td align="center">
       <a href="https://github.com/gustaallves">
-        <img style="border-radius: 50%;" src="https://github.com/gustaallves.png" width="150px;"/>
+        <img style="border-radius: 50%;" src="https://github.com/JonasMelo21.png" width="150px;"/>
         <h5 class="text-center">Gustavo Alves</h5>
       </a>
     </td>
