@@ -22,24 +22,22 @@ git clone https://github.com/DigogSXD/TaskMaster.git
 
 ## Equipe do Projeto
 
-<body>
-    <div class="center-content">
-        <table>
-            <tr>
-                <td align="center">
-                    <a href="https://github.com/digogsxd">
-                        <img style="border-radius: 50%;" src="https://github.com/digogsxd.png" width="150px"/>
-                        <h5 class="text-center">Diogo Borges</h5>
-                    </a>
-                </td>
-                <td align="center">
-                    <a href="https://github.com/JonasMelo21">
-                        <img style="border-radius: 50%;" src="https://github.com/JonasMelo21.png" width="150px"/>
-                        <h5 class="text-center">Jonas</h5>
-                    </a>
-                </td>
-            </tr>
-        </table>
-    </div>
-</body>
-</html>
+<center>
+<table style="margin-left: auto; margin-right: auto;">
+<tr>
+        <td align="center">
+      <a href="https://github.com/digogsxd">
+        <img style="border-radius: 50%;" src="https://github.com/digogsxd.png" width="150px;"/>
+        <h5 class="text-center">Diogo Borges</h5>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/JonasMelo21">
+        <img style="border-radius: 50%;" src="https://github.com/JonasMelo21.png" width="150px;"/>
+        <h5 class="text-center">Jonas</h5>
+      </a>
+    </td>
+  
+</table>
+
+</center>
