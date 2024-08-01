@@ -1,5 +1,5 @@
 
-# BrowStyle
+# TaskMaster
 
 ##  Histórico de Versão
 
@@ -8,9 +8,9 @@
 | 01/08/2024 | 1.0 | Criação do Documento  | Diogo Borges e Jonas |
 | 01/08/2024 | 1.01 | Atualização nome do projeto  | Diogo Borges e Jonas |
 
-O **BrowStyle** surge para resolver um problema comum: cancelamentos de última hora e falta de confirmação prévia em sessões de beleza. Identificamos a necessidade de uma comunicação mais eficaz entre profissionais e clientes.
+O **TaskMaster** 
 
-Os cancelamentos repentinos causam frustrações e perdas de tempo para ambos os lados. Nosso objetivo é simplificar o processo de agendamento e garantir uma experiência mais suave para profissionais e clientes.
+
 
 ## Integrantes 
 
