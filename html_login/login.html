@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login e Cadastro</title>
     <link rel="stylesheet" href="styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+        integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
+
 <body>
     <div class="container">
         <div class="form-container" id="loginContainer">
@@ -13,7 +22,7 @@
                 <h2>Login</h2>
                 <div class="input-group">
                     <label for="loginEmail">Email:</label>
-                    <input type="email" id="loginEmail" required>
+                    <input type="email" id="loginEmail" required class="money">
                 </div>
                 <div class="input-group">
                     <label for="loginPassword">Senha:</label>
@@ -23,7 +32,7 @@
                 <button type="button" id="toSignupButton">Ir para Cadastro</button>
             </form>
         </div>
-        <div class="form-container" id="signupContainer" style="display: none;">
+        <div class="form-container" id="signupContainer">
             <form id="signupForm">
                 <h2>Cadastro</h2>
                 <div class="input-group">
@@ -38,7 +47,34 @@
                 <button type="button" id="toLoginButton">Ir para Login</button>
             </form>
         </div>
+        <div id="dogsCntainer">
+            <image id="dogo" src="" style="width: 100px; height: 100px;" />
+            <button id="pegaDog">Pega um dogo ai</button>
+        </div>
     </div>
     <script src="script.js"></script>
+
+    <script>
+        $("#toSignupButton").click(() => {
+            $("#loginContainer").fadeOut({
+                complete() {
+                    $("#signupContainer").fadeIn();
+                }
+            });
+        })
+
+        $("#pegaDog").click(() => {
+            $("#pegaDog").attr("disabled", true);
+
+            $.ajax("https://dog.ceo/api/breeds/image/random").done(data => {
+                console.log(data);
+                $("#dogo").attr("src", data.message);
+                $("#pegaDog").attr("disabled", false);
+            });
+        })
+
+
+    </script>
 </body>
+
 </html>
