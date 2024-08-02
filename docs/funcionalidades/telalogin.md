@@ -26,9 +26,9 @@
 
 <font size="2"><p style="text-align: center">Tabela 1 - Cronograma de Entregas</p></font>
 
-    | **Versão** | **Data** | **Descrição** | **Autor** | **Revisor** |
-    |------------|----------|---------------|-----------|-------------| 
-    | 1.0  | 02/08/2024| Avaliação do front  | [Diogo Borges](https://github.com/DigogsXD) | [Jonas](https://github.com/jonasmelo21) |
+| **Versão** | **Data** | **Descrição** | **Autor** | **Revisor** |
+|------------|----------|---------------|-----------|-------------| 
+| 1.0  | 02/08/2024| Avaliação do front  | [Diogo Borges](https://github.com/DigogsXD) | [Jonas](https://github.com/jonasmelo21) |
 
 
 
