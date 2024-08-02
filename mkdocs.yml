@@ -23,11 +23,11 @@ theme:
   font:
     text: "Montserrat"
     code: "sans-serif"
-    
+
 nav:
   - Introdução: index.md
   - Funcionalidades:
-    - Cadastrar Usuário: funcionalidades/cadastrar-usuario.md
+    - Cadastrar Usuário: funcionalidades/tela-login.md
     - Adicionar Tarefa: funcionalidades/adicionar-tarefa.md
     - Editar Tarefa: funcionalidades/editar-tarefa.md
     - Excluir Tarefa: funcionalidades/excluir-tarefa.md
