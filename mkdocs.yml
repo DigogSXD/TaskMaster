@@ -23,10 +23,7 @@ theme:
   font:
     text: "Montserrat"
     code: "sans-serif"
-
-extra_css:
-  - stylesheets/styles.css
-
+    
 nav:
   - Introdução: index.md
   - Funcionalidades:
@@ -35,3 +32,11 @@ nav:
     - Editar Tarefa: funcionalidades/editar-tarefa.md
     - Excluir Tarefa: funcionalidades/excluir-tarefa.md
     - Analisar Performance nas Tarefas: funcionalidades/analisar-performance.md
+
+
+
+
+
+
+extra_css:
+  - docs/custom.css
