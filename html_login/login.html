@@ -47,8 +47,9 @@
                 <button type="button" id="toLoginButton">Ir para Login</button>
             </form>
         </div>
-        <div id="dogsCntainer">
-            <image id="dogo" src="" style="width: 100px; height: 100px;" />
+        <div id="dogsCntainer"
+            style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 1rem;">
+            <image id="dogo" src="" style="width: 300px; height: 300px; object-fit: contain;"  />
             <button id="pegaDog">Pega um dogo ai</button>
         </div>
 
@@ -75,6 +76,7 @@
     <script>
         const taskList = [];
 
+        $("#dogo").hide();
         $("#toSignupButton").click(() => {
             $("#loginContainer").fadeOut({
                 complete() {
@@ -89,7 +91,9 @@
             $.ajax("https://dog.ceo/api/breeds/image/random").done(data => {
                 console.log(data);
                 $("#dogo").attr("src", data.message);
+                $("#dogo").show();
                 $("#pegaDog").attr("disabled", false);
+
             });
         })
 
