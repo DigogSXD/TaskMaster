@@ -77,6 +77,7 @@
         const taskList = [];
 
         $("#dogo").hide();
+
         $("#toSignupButton").click(() => {
             $("#loginContainer").fadeOut({
                 complete() {
@@ -84,6 +85,20 @@
                 }
             });
         })
+
+
+        $("#toLoginButton").click(() => {
+            $("#signupContainer").fadeOut({
+                complete() {
+                    $("#loginContainer").fadeIn();
+                }
+            });
+        })
+        
+
+
+
+
 
         $("#pegaDog").click(() => {
             $("#pegaDog").attr("disabled", true);
@@ -93,14 +108,9 @@
                 $("#dogo").attr("src", data.message);
                 $("#dogo").show();
                 $("#pegaDog").attr("disabled", false);
-                Swal.fire({
-                    title: "The Internet?",
-                    text: "That thing is still around?",
-                    icon: "question"
-                });
             });
         })
-
+        
 
         $("#addTask").click(() => {
             const taskValor = $("#task").val();
