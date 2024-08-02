@@ -13,9 +13,13 @@ O **TaskMaster** A aplicação visa fornecer uma interface onde o usuário pode 
 ## Funcionalidades do TaskMaster
 
 Cadastrar Usuário
+
 Adicionar Tarefa
+
 Editar Tarefa
+
 Excluir Tarefa
+
 Analisar Performance nas Tarefas
 
 
