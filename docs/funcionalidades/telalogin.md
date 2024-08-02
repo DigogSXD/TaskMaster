@@ -25,6 +25,7 @@
 
 
 
-| Versão | Data       | Descrição            | Autor                                              | Revisor                                      |
-| ------ | ---------- | -------------------- | -------------------------------------------------- | -------------------------------------------- |
-| 1.0    | 02/08/2024 | Avaliação dos Protótipos de front| [Diogo Borges](https://github.com/DigogsXD) | [Jonas](https://github.com/jonasmelo21) |
+
+| **Versão** | **Data** | **Descrição** | **Autor** | **Revisor** |
+| :--------: | :--------: | :--------:  | :--------: | 
+| 1.0  | 02/08/2024| Avaliação do front  | [Diogo Borges](https://github.com/DigogsXD) | [Jonas](https://github.com/jonasmelo21) |
