@@ -29,17 +29,9 @@ extra_css:
 
 nav:
   - Introdução: index.md
-  - Visão do Produto e Projeto:
-    - Visão do Produto: visao_produto_projeto/visao_do_produto.md
-    - Visão do Projeto: visao_produto_projeto/visao_do_projeto.md
-  - Processo de Desenvolvimento de Software: processoDev.md 
-  - Backlog:
-    - Requisitos e Critérios: backlog/requisitos-criterios.md
-    - MVP: backlog/mvp.md
-  - Sprints:
-    - Sprint 1: sprints/sprint-1.md
-    - Sprint 2: sprints/sprint-2.md
-  - Lições Aprendidas: licoesAprendidas.md
-  - Entregas:
-    - Unidade 1: entregas/unidade01.md
-    - Unidade 2: entregas/unidade02.md
+  - Funcionalidades:
+    - Cadastrar Usuário: funcionalidades/cadastrar-usuario.md
+    - Adicionar Tarefa: funcionalidades/adicionar-tarefa.md
+    - Editar Tarefa: funcionalidades/editar-tarefa.md
+    - Excluir Tarefa: funcionalidades/excluir-tarefa.md
+    - Analisar Performance nas Tarefas: funcionalidades/analisar-performance.md
