@@ -47,13 +47,8 @@
                 <button type="button" id="toLoginButton">Ir para Login</button>
             </form>
         </div>
-        <div id="dogsCntainer"
-            style="display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 1rem;">
-            <image id="dogo" src="" style="width: 300px; height: 300px; object-fit: contain;" />
-            <button id="pegaDog">Pega um dogo ai</button>
-        </div>
 
-        <div>
+        <!-- <div>
             <div style="display: flex;">
                 <input id="task" type="text">
                 <select id="prio" value="">
@@ -69,14 +64,12 @@
 
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
     <script src="script.js"></script>
 
     <script>
-        const taskList = [];
-
-        $("#dogo").hide();
+        // const taskList = [];
 
         $("#toSignupButton").click(() => {
             $("#loginContainer").fadeOut({
@@ -95,36 +88,21 @@
             });
         })
         
-
-
-
-
-
-        $("#pegaDog").click(() => {
-            $("#pegaDog").attr("disabled", true);
-
-            $.ajax("https://dog.ceo/api/breeds/image/random").done(data => {
-                console.log(data);
-                $("#dogo").attr("src", data.message);
-                $("#dogo").show();
-                $("#pegaDog").attr("disabled", false);
-            });
-        })
         
 
-        $("#addTask").click(() => {
-            const taskValor = $("#task").val();
-            const prioValor = Number($("#prio").val());
+        // $("#addTask").click(() => {
+        //     const taskValor = $("#task").val();
+        //     const prioValor = Number($("#prio").val());
 
-            taskList.push({ task: taskValor, prio: prioValor });
-            taskList.sort((a, b) => a.prio - b.prio);
+        //     taskList.push({ task: taskValor, prio: prioValor });
+        //     taskList.sort((a, b) => a.prio - b.prio);
 
-            $("#tasksList").empty()
-            taskList.forEach(item => {
-                $("#tasksList").append(`<li>${item.prio} - ${item.task}</li>`);
-            })
-            $("#task").val("")
-        })
+        //     $("#tasksList").empty()
+        //     taskList.forEach(item => {
+        //         $("#tasksList").append(`<li>${item.prio} - ${item.task}</li>`);
+        //     })
+        //     $("#task").val("")
+        // })
 
     </script>
 
