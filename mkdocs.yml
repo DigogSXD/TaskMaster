@@ -27,11 +27,8 @@ theme:
 nav:
   - Introdução: index.md
   - Funcionalidades:
-    - Cadastrar Usuário: funcionalidades/telalogin.md
-    - Adicionar Tarefa: funcionalidades/adicionar-tarefa.md
-    - Editar Tarefa: funcionalidades/editar-tarefa.md
-    - Excluir Tarefa: funcionalidades/excluir-tarefa.md
-    - Analisar Performance nas Tarefas: funcionalidades/analisar-performance.md
+    - Tela de Login: funcionalidades/telalogin.md
+
 
 
 
