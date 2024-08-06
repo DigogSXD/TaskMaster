@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="taskmaster.css">
 </head>
 <body>
     <div class="calendar">
@@ -27,6 +27,12 @@
         </div>
         <div class="days" id="days"></div>
     </div>
-    <script src="script.js"></script>
+    <div class="tasks">
+        <h2>Tarefas para <span id="selected-date"></span></h2>
+        <input type="text" id="task-input" placeholder="Adicionar nova tarefa">
+        <button id="add-task">Adicionar</button>
+        <ul id="task-list"></ul>
+    </div>
+    <script src="taskmaster.js"></script>
 </body>
 </html>
