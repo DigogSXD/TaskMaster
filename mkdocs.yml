@@ -39,4 +39,4 @@ nav:
 
 
 extra_css:
-  - docs/custom.css
+  - custom.css
