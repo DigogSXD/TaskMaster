@@ -5,19 +5,25 @@ repo_url: "https://github.com/DigogSXD/TaskMaster"
 
 theme:
   name: material
+  language: pt-BR
+  features:
+    - navigation.instant
+    - navigation.section
+    - navigation.path
+    - navigation.top
+    - navigation.tabs
+    - navigation.tabs.sticky
   palette:
     - scheme: default
+      primary: yellow
       toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-      primary: '#3dafe5'
-      accent: '#3dafe5'
+        icon: material/weather-night
+        name: Modo noturno
     - scheme: slate
+      primary: yellow
       toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-      primary: '#3dafe5'
-      accent: '#3dafe5'
+        icon: material/weather-sunny
+        name: Modo claro
 
 
   font:
@@ -29,7 +35,7 @@ nav:
   - Funcionalidades:
     - Tela de Login: funcionalidades/telalogin.md
   - planejamento: planejamento/ferramentas.md
-  
+
 
 
 
