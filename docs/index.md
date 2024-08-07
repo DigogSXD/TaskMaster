@@ -20,7 +20,7 @@ A prioridade é calculada multiplicando os níveis de Facilidade e Importância,
 ## Funcionalidades do TaskMaster
 
 ### 1. Cadastrar Usuário
-Descrição de como cadastrar um usuário no TaskMaster.
+Descrição de como cadastrar um usuário no TaskMaster
 
 ### 2. Adicionar Tarefa
 Descrição de como adicionar uma tarefa no TaskMaster.
