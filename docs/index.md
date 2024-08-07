@@ -1,6 +1,8 @@
 
 # TaskMaster
-
+<p align="center">
+  <img src="Logo/Logo_TM.png" alt="Logo" />
+</p>
 ##  Histórico de Versão
 
 | **Data** | **Versão** | **Descrição** | **Autor** |

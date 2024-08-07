@@ -13,6 +13,7 @@ theme:
     - navigation.top
     - navigation.tabs
     - navigation.tabs.sticky
+  logo: "logo/Logo_TM.png"  
   palette:
     - scheme: default
       primary: yellow
@@ -25,7 +26,6 @@ theme:
         icon: material/weather-sunny
         name: Modo claro
 
-
   font:
     text: "Montserrat"
     code: "sans-serif"
@@ -34,14 +34,8 @@ nav:
   - Introdução: index.md
   - Funcionalidades:
     - Tela de Login: funcionalidades/telalogin.md
-  - planejamento: planejamento/ferramentas.md
-
-
-
-
-
-
-
+  - Planejamento: 
+    - Ferramentas: planejamento/ferramentas.md
 
 extra_css:
   - custom.css
