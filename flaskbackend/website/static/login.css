@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: url('fotos/login.jpg') no-repeat center center fixed;
+    background: url('login.jpg') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;

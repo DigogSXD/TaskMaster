@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login e Cadastro</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}">
+    
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -67,7 +68,7 @@
             </div>
         </div> -->
     </div>
-    <script src="login.js"></script>
+    <script src = "{{url_for('static',filename='login.js')}}"></script>
 
     <script>
         // const taskList = [];
