@@ -29,9 +29,13 @@
                     <input type="password" id="loginPassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
+                
+                <button type="button" id="esqueciSenhaButton"class="btn btn-primary">Esqueci a senha</button>
+
                 <button type="button" id="toSignupButton" class="btn btn-secondary">Ir para Cadastro</button>
             </form>
         </div>
+        
         <div class="form-container" id="signupContainer">
             <form id="signupForm">
                 <h2>Cadastro</h2>
@@ -45,32 +49,60 @@
                 </div>
                 <button type="submit">Cadastrar</button>
                 <button type="button" id="toLoginButton">Ir para Login</button>
-                <button type="button">Ir para Login</button>
             </form>
         </div>
 
-        <!-- <div>
-            <div style="display: flex;">
-                <input id="task" type="text">
-                <select id="prio" value="">
-                    <option>Select a prio</option>
-                    <option value="1">1</option>
-                    <option value="3">3</option>
-                    <option value="5">5</option>
-                </select>
-                <button id="addTask">add</button>
-            </div>
-            <div id="tasks">
-                <ul id="tasksList">
 
-                </ul>
-            </div>
-        </div> -->
+        <div class="form-container" id="toesqueciSenha">
+            <form id="senhaForm">
+                <h2>Recuperar senha</h2>
+                <div class="input-group">
+                    <label for="loginEmail" class="form-label">Email:</label>
+                    <input type="email" id="loginEmail" required class="money form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+
+                <button type="button" id="toSignupButton2" class="btn btn-secondary">Ir para Cadastro</button>
+
+                <button type="button" id="toLoginButton2">Ir para Login</button>
+                
+            </form>
+        </div>
+
     </div>
     <script src="{{url_for('static',filename='login.js')}}"></script>
 
     <script>
-        // const taskList = [];
+
+        $("#esqueciSenhaButton").click(() => {
+            $("#loginContainer").fadeOut({
+                complete(){
+                    $("#toesqueciSenha").fadeIn();
+                }
+            });
+        })
+
+
+        $("#toSignupButton2").click(() => {
+            $("#toesqueciSenha").fadeOut({
+                complete(){
+                    $("#signupContainer").fadeIn();
+                }
+            });
+        })
+
+        $("#toLoginButton2").click(() => {
+            $("#toesqueciSenha").fadeOut({
+                complete(){
+                    $("#loginContainer").fadeIn();
+                }
+            });
+        })
+
+
+
+
+
 
         $("#toSignupButton").click(() => {
             $("#loginContainer").fadeOut({
@@ -90,21 +122,6 @@
         })
         
         
-
-        // $("#addTask").click(() => {
-        //     const taskValor = $("#task").val();
-        //     const prioValor = Number($("#prio").val());
-
-        //     taskList.push({ task: taskValor, prio: prioValor });
-        //     taskList.sort((a, b) => a.prio - b.prio);
-
-        //     $("#tasksList").empty()
-        //     taskList.forEach(item => {
-        //         $("#tasksList").append(`<li>${item.prio} - ${item.task}</li>`);
-        //     })
-        //     $("#task").val("")
-        // })
-
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
