@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - Gerenciamento de Projetos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        header ul li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+
+        .main {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="submit"], button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .actions button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>TaskMaster</h1>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container main">
+        <h2>Gerenciamento de Projetos</h2>
+
+        <form id="projectForm">
+            <input type="text" id="projectName" placeholder="Nome do Projeto">
+            <input type="submit" value="Criar Projeto">
+        </form>
+
+        <h3>Projetos</h3>
+        <table id="projectsTable">
+            <tr>
+                <th>Nome do Projeto</th>
+                <th>Ações</th>
+            </tr>
+            <!-- Os projetos serão adicionados aqui -->
+        </table>
+    </div>
+
+    <script>
+        const form = document.getElementById('projectForm');
+        const projectNameInput = document.getElementById('projectName');
+        const projectsTable = document.getElementById('projectsTable');
+
+        let projects = [];
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const projectName = projectNameInput.value.trim();
+            if (projectName !== '') {
+                const projectId = new Date().getTime();
+                projects.push({ id: projectId, name: projectName });
+                addProjectToTable(projectId, projectName);
+                projectNameInput.value = '';
+            }
+        });
+
+        function addProjectToTable(id, name) {
+            const row = projectsTable.insertRow();
+            row.setAttribute('data-id', id);
+
+            const cellName = row.insertCell(0);
+            cellName.textContent = name;
+
+            const cellActions = row.insertCell(1);
+            cellActions.classList.add('actions');
+            cellActions.innerHTML = `
+                <button onclick="editProject(${id})">Editar</button>
+                <button onclick="deleteProject(${id})">Deletar</button>
+            `;
+        }
+
+        function editProject(id) {
+            const project = projects.find(p => p.id === id);
+            const newName = prompt('Edite o nome do projeto:', project.name);
+            if (newName !== null && newName.trim() !== '') {
+                project.name = newName.trim();
+                const row = projectsTable.querySelector(`tr[data-id='${id}']`);
+                row.cells[0].textContent = newName.trim();
+            }
+        }
+
+        function deleteProject(id) {
+            if (confirm('Você tem certeza que deseja deletar este projeto?')) {
+                projects = projects.filter(p => p.id !== id);
+                const row = projectsTable.querySelector(`tr[data-id='${id}']`);
+                projectsTable.deleteRow(row.rowIndex);
+            }
+        }
+    </script>
+
+</body>
+</html>
