@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - Gerenciamento de Projetos</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='taskMaster.css')}}">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>TaskMaster</h1>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container main">
+        <h2>Gerenciamento de Projetos</h2>
+
+        <form id="projectForm">
+            <input type="text" id="projectName" placeholder="Nome do Projeto" required>
+            <input type="submit" value="Criar Projeto">
+        </form>
+
+        <h3>Projetos</h3>
+        <table id="projectsTable">
+            <tr>
+                <th>Nome do Projeto</th>
+                <th>Ações</th>
+            </tr>
+            <!-- Os projetos serão adicionados aqui -->
+        </table>
+    </div>
+
+    <script src="{{url_for('static', filename='taskMaster.js')}}"></script>
+</body>
+</html>
