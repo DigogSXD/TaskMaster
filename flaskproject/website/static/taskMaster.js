@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const cellActions = row.insertCell(1);
         cellActions.classList.add('actions');
         cellActions.innerHTML = `
-            <button onclick="editProject(${id})">Editar</button>
-            <button onclick="deleteProject(${id})">Deletar</button>
+            <button onclick="editProject(${id})" style="background-color: #337ab7; color: white;">Editar</button>
+            <button onclick="deleteProject(${id})" style="background-color: red; color: white;">Deletar</button>
+            <button onclick="manageProject(${id})" style="background-color: #337ab7; color: white;">Gerenciar</button>
         `;
     }
 
@@ -47,5 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const row = projectsTable.querySelector(`tr[data-id='${id}']`);
             projectsTable.deleteRow(row.rowIndex);
         }
+    }
+
+    window.manageProject = function(id) {
+        // Redirecionar para a página de gerenciamento do projeto
+        window.location.href = `/projeto/${id}`;
     }
 });

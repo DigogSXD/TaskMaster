@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+TaskMaster - Gerenciamento de Projetos
+{% endblock %}
+
+{% block content %}
+    <h2>Gerenciamento de Projetos</h2>
+
+    <form id="projectForm">
+        <input type="text" id="projectName" placeholder="Nome do Projeto" required>
+        <input type="submit" value="Criar Projeto">
+    </form>
+
+    <h3>Projetos</h3>
+    <table id="projectsTable">
+        <tr>
+            <th>Nome do Projeto</th>
+            <th>Ações</th>
+        </tr>
+    </table>
+{% endblock %}
+

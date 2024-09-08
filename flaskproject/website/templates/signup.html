@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='signup.css')}}">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+TaskMaster - Cadastro
+{% endblock %}
+
+{% block content %}
     <div class="container">
         <div class="form-container" id="signupContainer">
             <form id="signupForm">
@@ -24,6 +22,8 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
     <script src="{{url_for('static', filename='signup.js')}}"></script>
-</body>
-</html>
+{% endblock %}
