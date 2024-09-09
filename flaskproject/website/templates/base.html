@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TaskMaster{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='taskMaster.css')}}">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+
+    <header>
+        <div class="containerTask">
+            <h1>TaskMaster</h1>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('cadastrar') }}">Cadastrar</a></li>
+            </ul>
+        </div>
+    </header>
+    
+
+    <div class="container main">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{url_for('static', filename='taskMaster.js')}}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
