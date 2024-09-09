@@ -1,29 +1,45 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}">
+</head>
+<body>
 
-{% block title %}
-TaskMaster - Login
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-        <div class="form-container" id="loginContainer">
-            <form id="loginForm">
+    <!-- Uma div que guarda todo o conteúdo da página -->
+    <div class = 'container'>
+        <div class = 'form-container' id = 'loginContainer'>
+            <form action = "/" method = "POST"id = 'loginForm'>
+                <!-- Uma espécie de título para o formulário -->
                 <h2>Login</h2>
-                <div class="input-group">
-                    <label for="loginEmail">Email:</label>
-                    <input type="email" id="loginEmail" required>
+                
+                <div class="mb-3">
+                    <!-- Texto que aparece à esquerda da caixa de input -->
+                    <label for="loginEmail" class = "form-label">Email:</label>
+
+                    <input type="email" id="loginEmail"  class = "form-control"
+                    name="emailLogin"
+                    placeholder ="Entre email">
                 </div>
-                <div class="input-group">
+
+                <div class = "input-group">
+                    <!-- Texto que aparece antes da caixa de input senha -->
                     <label for="loginPassword">Senha:</label>
-                    <input type="password" id="loginPassword" required>
+                    <input type="password" id="loginPassword"  class = "form-control"
+                    name="passwordLogin"
+                    placeholder ="Entre password">
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <button type="button" id="toSignupButton" class="btn btn-secondary">Ir para Cadastro</button>
+                
+                <button type="submit" class = "btn btn-primary">Login</button>
+                <button type="button" id="toSignup" class="btn btn-secondary">Ir para Cadastro</button>
+                <button type="button" id ="esqueci"class="btn btn-secondary">Esqueci a senha</button>
+
             </form>
+
         </div>
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <script src="{{url_for('static', filename='login.js')}}"></script>
-{% endblock %}
+    
+</body>
+</html>
