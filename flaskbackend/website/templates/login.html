@@ -32,8 +32,6 @@
                 <!-- Link estilizado como botão -->
                 <a href="{{ url_for('auth.signup') }}" class="btn btn-secondary" role="button">Ir para Cadastro</a>
 
-                <button type="button" id="esqueci" class="btn btn-secondary">Esqueci a senha</button>
-
 
 
             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -53,6 +51,10 @@
             </form>
         </div>
     </div>
+    <!-- Scripts do Bootstrap (necessário para o funcionamento do botão de fechar nos alerts) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

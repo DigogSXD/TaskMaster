@@ -6,24 +6,28 @@ from .models import Usuario ,Project
 
 auth = Blueprint('auth',__name__)
 
-@auth.route('/',methods=['GET','POST'])
+@auth.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         data = request.form
         email = data.get('emailLogin')
         senha = data.get('passwordLogin')
 
-        user = Usuario.query.filter_by(email = email).first()
+        # Verifica se o usuário existe no banco de dados
+        user = Usuario.query.filter_by(email=email).first()
 
         if not user:
-            flash("Usuário inexistente! Faça cadastro antes",category='error')
+            flash("Usuário inexistente! Faça cadastro antes", category='error')
         else:
-            if check_password_hash(user.password,senha):
-                flash("Login bem sucedido",category='success')
+            # Verifica se a senha está correta
+            if check_password_hash(user.password, senha):
+                flash("Login bem sucedido", category='success')
                 return redirect(url_for('auth.home'))
-            
-    flash("Senha incorreta")      
+            else:
+                flash("Senha incorreta", category='error')
+
     return render_template('login.html')
+
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
