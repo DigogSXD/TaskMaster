@@ -25,35 +25,37 @@ def login():
     flash("Senha incorreta")      
     return render_template('login.html')
 
-@auth.route('/signup',methods=['GET','POST'])
+@auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    email = request.form.get('emailsignup')
-    senha = request.form.get('passwordsignup')
-    print(email)
-    print(senha)
-
-    user = Usuario.query.filter_by(email = email).first()
-
-    if user:
-        flash("Usuário já cadastrado! Faça Login")
-        return redirect(url_for('auth.login'))
-    
     if request.method == 'POST':
+        email = request.form.get('emailsignup')
         senha = request.form.get('passwordsignup')
+
+        # Debug prints
+        print(email)
+        print(senha)
+
+        user = Usuario.query.filter_by(email=email).first()
+
+        if user:
+            flash("Usuário já cadastrado! Faça Login", category='error')
+            return redirect(url_for('auth.login'))
+
         if len(senha) <= 10:
-            flash("A senha deve ter pelo menos 10 caracteres",category='error')
+            flash("A senha deve ter pelo menos 10 caracteres", category='error')
             return redirect(url_for('auth.signup'))
-        else:            
+        else:
             novo_user = Usuario(email=email, password=generate_password_hash(senha, method='pbkdf2:sha256', salt_length=8))
 
             db.session.add(novo_user)
             db.session.commit()
 
-            flash("Usuário cadastrado com sucesso",category='success')
+            flash("Usuário cadastrado com sucesso", category='success')
 
             return redirect(url_for('auth.login'))
 
     return render_template('signup.html')
+
 
 @auth.route('/logout')
 def logout():
@@ -77,3 +79,9 @@ def home():
 
 
     return render_template('taskMaster.html')
+
+
+
+@auth.route('/sobre')
+def sobre():
+    return render_template('sobre.html')

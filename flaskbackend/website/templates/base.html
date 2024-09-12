@@ -10,16 +10,16 @@
 <body>
 
     <header>
-        <div class="container">
+        <div class="containerTask">
             <h1>TaskMaster</h1>
             <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="{{ url_for('auth.home') }}">Home</a></li>
+                <li><a href="{{ url_for('auth.sobre') }}">Sobre</a></li>
+
             </ul>
         </div>
     </header>
-    
+
 
     <div class="container main">
         {% block content %}{% endblock %}

@@ -108,11 +108,11 @@ header ul li a {
 header h1 {
     margin: 0;
     text-align: center;
-    color: #000000; /* Preto */
+    color: #ffffff; /* Preto */
 }
 
 header ul li a {
-    color: #000000; /* Preto */
+    color: #ffffff; /* Preto */
     text-decoration: none;
 }
 .kanban-board {
