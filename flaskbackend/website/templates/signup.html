@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+</head>
+<body>
+
+    <!-- Exibe mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Uma div que guarda todo o conteúdo da página -->
+    <div class='container'>
+        <div class='form-container' id='signupContainer'>
+            <form action="/signup" method="POST" id="signupForm">
+                <!-- Título do formulário -->
+                <h2>Cadastro</h2>
+                
+                <div class="mb-3">
+                    <!-- Texto que aparece à esquerda da caixa de input -->
+                    <label for="signupEmail" class="form-label">Email:</label>
+
+                    <input type="email" id="signupEmail" class="form-control"
+                    name="emailsignup" placeholder="Entre com o email" required>
+                </div>
+
+                <div class="input-group">
+                    <!-- Texto que aparece antes da caixa de input senha -->
+                    <label for="signupPassword">Senha:</label>
+                    <input type="password" id="signupPassword" class="form-control"
+                    name="passwordsignup" placeholder="Entre com a senha" required>
+                </div>
+                
+                <!-- Botão para submeter o formulário -->
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
