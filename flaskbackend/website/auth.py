@@ -111,3 +111,10 @@ def adicionar_projeto():
     return redirect('/')
 
 
+@auth.route('/esqueceu')
+def esqueceu():
+    #Você vai brilhar aqui parceiro kk
+
+
+
+    return render_template('esqueceu.html')

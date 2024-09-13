@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='esqueceu.css') }}">
+</head>
+<body>
+
+    <!-- Uma div que guarda todo o conteúdo da página -->
+    <div class='container'>
+        <div class='form-container' id='loginContainer'>
+            <form action="/" method="POST" id='loginForm'>
+                <!-- Uma espécie de título para o formulário -->
+                <h2>Mudar senha</h2>
+                
+                <div class="mb-3">
+                    <!-- Texto que aparece à esquerda da caixa de input -->
+                    <label for="loginEmail" class="form-label">Email:</label>
+
+                    <!-- trocar o id -->
+                    <input type="email" id="loginEmail" class="form-control" name="emailLogin" placeholder="Entre email">
+                </div>
+
+                <div class="input-group">
+                    <!-- Texto que aparece antes da caixa de input senha -->
+                    <label for="loginPassword">Sua nova Senha:</label>
+
+                    <!-- trocar o id -->
+                    <input type="password" id="loginPassword" class="form-control" name="passwordLogin" placeholder="Entre password">
+                </div>
+
+                <div class="input-group"></div>
+                    <!-- Texto que aparece antes da caixa de input senha -->
+                    <label for="loginPassword">Sua nova Senha novamente:</label>
+
+                    <!-- trocar o id -->
+                    <input type="password" id="loginPassword" class="form-control" name="passwordLogin" placeholder="Entre password">
+                </div>
+                <!-- trocar o id -->
+                <button type="submit" class="btn btn-primary">Mudar</button>
+
+                <!-- Link estilizado como botão -->
+                <a href="{{ url_for('auth.login') }}" class="btn btn-secondary" role="button">Login</a>
+
+
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}    
+            </form>
+        </div>
+    </div>
+    <!-- Scripts do Bootstrap (necessário para o funcionamento do botão de fechar nos alerts) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

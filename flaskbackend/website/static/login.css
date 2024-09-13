@@ -106,7 +106,6 @@ button:hover {
 a.btn {
     display: inline-block;
     padding: 10px;
-    margin-bottom: 10px;
     color: white;
     background-color: #6c757d; /* cor do botão secundário */
     border: none;
@@ -127,4 +126,10 @@ button[type="button"]{
 
 button[type=button]:hover{
     background-color: #5a6268;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adiciona espaçamento vertical entre os itens */
 }
