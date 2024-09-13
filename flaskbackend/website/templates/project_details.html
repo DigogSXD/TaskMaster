@@ -11,7 +11,7 @@ TaskMaster - Gerenciamento de Tarefas
         <!-- Coluna Pré-requisitos -->
         <div class="kanban-column">
             <h3>Pré-requisitos</h3>
-            <ul id="prerequisites" class="kanban-list">
+            <ul id="prerequisites" class="kanban-list" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <!-- Tarefas pré-requisitos -->
             </ul>
             <input type="text" id="newPrerequisite" placeholder="Nova tarefa" required>
@@ -21,7 +21,7 @@ TaskMaster - Gerenciamento de Tarefas
         <!-- Coluna Em Produção -->
         <div class="kanban-column">
             <h3>Em Produção</h3>
-            <ul id="inProduction" class="kanban-list">
+            <ul id="inProduction" class="kanban-list" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <!-- Tarefas em produção -->
             </ul>
             <input type="text" id="newInProduction" placeholder="Nova tarefa" required>
@@ -31,7 +31,7 @@ TaskMaster - Gerenciamento de Tarefas
         <!-- Coluna Concluído -->
         <div class="kanban-column">
             <h3>Concluído</h3>
-            <ul id="completed" class="kanban-list">
+            <ul id="completed" class="kanban-list" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <!-- Tarefas concluídas -->
             </ul>
             <input type="text" id="newCompleted" placeholder="Nova tarefa" required>
@@ -40,6 +40,10 @@ TaskMaster - Gerenciamento de Tarefas
     </div>
 {% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='project_details.css') }}">
+{% endblock %}
+
 {% block scripts %}
-    <script src="{{ url_for('static', filename='kanban.js') }}"></script>
+    <script src="{{ url_for('static', filename='project_details.js') }}"></script>
 {% endblock %}
