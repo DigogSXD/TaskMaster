@@ -53,3 +53,23 @@ button {
 button:hover {
     background-color: #218838;
 }
+
+#SalvarProj {
+    background-color: #4CAF50; /* cor de fundo */
+    color: white; /* cor do texto */
+    border: none; /* sem borda */
+    padding: 10px 20px; /* espaçamento interno */
+    text-align: center; /* alinhamento do texto */
+    text-decoration: none; /* remover sublinhado se for link */
+    display: block; /* necessário para que margin auto funcione */
+    font-size: 16px; /* tamanho da fonte */
+    margin: 20px auto; /* centraliza horizontalmente */
+    cursor: pointer; /* cursor de mãozinha ao passar o mouse */
+    border-radius: 5px; /* cantos arredondados */
+    width: auto; /* Definir a largura para automática */
+  }
+  
+  #SalvarProj:hover {
+    background-color: #45a049; /* cor ao passar o mouse */
+  }
+  
