@@ -120,13 +120,25 @@ def esqueceu():
     nova_senha = request.form.get('senha1')
     nova_senha2 = request.form.get('senha2')
 
-    # print(email)
-    # print(nova_senha)
-    # print(nova_senha2)
-
     if request.method == 'POST':
+        """
+        É aqui que eu tentei inicialmente fazer um teste pra vizualizar td
+            Deu certo, mas não consegui fazer em outro arquivo
+        
+        users = Usuario.query.all()
+        
+        for i in list(users):
+            print(i.id_user)
+            print(i.email)
+            print(i.password)
+            print("\n\n")
+        """
+        
+        """Aqui estou fazendo a lógica normal da página de esqueceu a senha(não precisa alterar nada, tá funfando)"""
         user = Usuario.query.filter_by(email=email).first()
-        print(user.id_user)
+        
+        #Printando no terminal só pra ver se ele consegue 'puxar' os dados do frontend
+        print(user.id_user) 
         print(user.email)
         print(user.password)
 
@@ -151,7 +163,8 @@ def esqueceu():
                     return redirect(url_for('auth.login'))
                 except Exception as e:
                     db.session.rollback()
-                    flash(f"Erro ao atualizar a senha: {str(e)}", category='error')
+                    flash(f"""Erro ao atualizar a senha: {str(e)} 
+                          Tente denovo""", category='error')
                     return redirect(url_for('auth.esqueceu'))
 
     return render_template('esqueceu.html')
