@@ -13,11 +13,15 @@ def login():
         email = data.get('emailLogin')
         senha = data.get('passwordLogin')
 
+        print(email)
+        print(senha)
+
         # Verifica se o usuário existe no banco de dados
         user = Usuario.query.filter_by(email=email).first()
 
         if not user:
             flash("Usuário inexistente! Faça cadastro antes", category='error')
+            return redirect(url_for('auth.signup'))
         else:
             # Verifica se a senha está correta
             if check_password_hash(user.password, senha):
@@ -27,6 +31,25 @@ def login():
                 flash("Senha incorreta", category='error')
 
     return render_template('login.html')
+
+@auth.route('/home',methods = ['POST','GET'])
+def home():
+    if request.method == 'POST':
+        dados = request.form 
+        print(dados)
+        
+        nome_projeto = dados.get('id')
+        projeto = Project.query.filter_by(nome_projeto = nome_projeto ).first()
+        if projeto:
+            flash("Já existe um projeto com esse nome",category = 'error')
+            return redirect(url_for('auth.home'))
+        else:
+            projeto_novo = Project(nome_projeto = nome_projeto)
+            db.session.add(projeto_novo)
+            db.session.commit()
+
+
+    return render_template('taskMaster.html')
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -65,25 +88,6 @@ def signup():
 def logout():
     return render_template('login.html')
 
-@auth.route('/home',methods = ['POST','GET'])
-def home():
-    if request.method == 'POST':
-        dados = request.form 
-        print(dados)
-        
-        nome_projeto = dados.get('id')
-        projeto = Project.query.filter_by(nome_projeto = nome_projeto ).first()
-        if projeto:
-            flash("Já existe um projeto com esse nome",category = 'error')
-            return redirect(url_for('auth.home'))
-        else:
-            projeto_novo = Project(nome_projeto = nome_projeto)
-            db.session.add(projeto_novo)
-            db.session.commit()
-
-
-    return render_template('taskMaster.html')
-
 
 
 @auth.route('/sobre')
@@ -105,16 +109,49 @@ def gerenciar_projeto(project_id):
 @auth.route('/adicionar_projeto', methods=['POST'])
 def adicionar_projeto():
     # Adicionar o projeto ao dicionário 'projects'
-    project_id = len(projects) + 1  # Gerar um ID único com base no número de projetos
     project_name = request.form['project_name']
-    projects[project_id] = project_name  # Armazenar o nome do projeto com o ID no dicionário 'projects'
     return redirect('/')
 
 
-@auth.route('/esqueceu')
+@auth.route('/esqueceu',methods = ['GET','POST'])
 def esqueceu():
-    #Você vai brilhar aqui parceiro kk
 
+    email = request.form.get('emailEsqueceu')
+    nova_senha = request.form.get('senha1')
+    nova_senha2 = request.form.get('senha2')
 
+    # print(email)
+    # print(nova_senha)
+    # print(nova_senha2)
+
+    if request.method == 'POST':
+        user = Usuario.query.filter_by(email=email).first()
+        print(user.id_user)
+        print(user.email)
+        print(user.password)
+
+        if not user:
+            flash("Usuário inexistente! Faça cadastro", category='error')
+            return redirect(url_for('auth.signup'))
+        else:    
+            if nova_senha != nova_senha2:
+                flash("As senhas devem ser iguais")
+                return redirect(url_for('auth.esqueceu'))
+            if len(nova_senha) < 10:
+                flash("A nova senha deve ter no mínimo 10 caracteres")
+                return redirect(url_for('auth.esqueceu.html'))
+            else:
+                # Atualizar a senha do usuário
+                user.password = generate_password_hash(nova_senha, method='pbkdf2:sha256')
+
+                # Commit da nova senha no banco de dados
+                try:
+                    db.session.commit()
+                    flash("Senha alterada com sucesso!", category='success')
+                    return redirect(url_for('auth.login'))
+                except Exception as e:
+                    db.session.rollback()
+                    flash(f"Erro ao atualizar a senha: {str(e)}", category='error')
+                    return redirect(url_for('auth.esqueceu'))
 
     return render_template('esqueceu.html')

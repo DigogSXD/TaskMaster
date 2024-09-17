@@ -12,3 +12,4 @@ class Project(db.Model):
     id_projeto = db.Column(db.Integer, primary_key=True)
     nome_projeto = db.Column(db.String(100), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('usuario.id_user'))  # Chave estrangeira referenciando Usuario
+    
