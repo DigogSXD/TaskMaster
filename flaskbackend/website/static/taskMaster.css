@@ -58,16 +58,17 @@ header ul li a {
     border-radius: 5px;
 }
 
-#projectForm input[type="submit"] {
+#projectForm button[type="submit"] {
     padding: 10px 20px;
     background-color: #28a745;
     border: none;
     color: white;
     border-radius: 5px;
+    margin-top: 20px; /* Adiciona espaço extra acima do botão */
     cursor: pointer;
 }
 
-#projectForm input[type="submit"]:hover {
+#projectForm button[type="submit"]:hover {
     background-color: #218838;
 }
 

@@ -7,9 +7,9 @@ TaskMaster - Gerenciamento de Projetos
 {% block content %}
     <h2>Gerenciamento de Projetos</h2>
 
-    <form method="POST" action="{{ url_for('auth.adicionar_projeto') }}">
-    <input type="text" name="project_name" placeholder="Nome do Projeto">
-    <button type="submit">Criar Projeto</button>
+    <form id="projectForm" method="POST" action="{{ url_for('auth.adicionar_projeto') }}">
+        <input type="text" id="projectName" name="project_name" placeholder="Nome do Projeto" required>
+        <button type="submit" value="Criar Projeto">Criar Projeto</button>
     </form>
 
     
