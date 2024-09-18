@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from flask_login import LoginManager
 from flask_login import login_user
+from flask_login import logout_user
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
@@ -53,13 +54,13 @@ def home():
             return redirect(url_for('auth.home'))
 
         # Verifica se o projeto já existe para o usuário logado
-        projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto, user_id=current_user.id_user).first()
+        projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto, user_id=current_user.id).first()
 
         if projeto_existente:
             flash("Já existe um projeto com esse nome", category='error')
         else:
             # Cria um novo projeto vinculado ao usuário logado
-            projeto_novo = Project(nome_projeto=nome_projeto, user_id=current_user.id_user)
+            projeto_novo = Project(nome_projeto=nome_projeto, user_id=current_user.id)
             db.session.add(projeto_novo)
             db.session.commit()
             flash('Projeto criado com sucesso!', category='success')
@@ -68,9 +69,9 @@ def home():
 
     # Se for uma requisição GET, lista os projetos do usuário logado
     projetos = Project.query.filter_by(user_id=current_user.id).all()
+    print(projetos)
     
     return render_template('taskMaster.html', projects=projetos)
-
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -107,6 +108,7 @@ def signup():
 
 @auth.route('/logout')
 def logout():
+    logout_user()  # Encerra a sessão do usuário
     return render_template('login.html')
 
 
@@ -183,7 +185,7 @@ def adicionar_projeto():
         return redirect(url_for('auth.home'))
     
     # Criar o novo projeto
-    novo_projeto = Project(nome_projeto=nome_projeto, user_id=current_user.id_user)
+    novo_projeto = Project(nome_projeto=nome_projeto, user_id=current_user.id)
     db.session.add(novo_projeto)
     db.session.commit()
 
@@ -206,7 +208,7 @@ def esqueceu():
         users = Usuario.query.all()
         
         for i in list(users):
-            print(i.id_user)
+            print(i.id)
             print(i.email)
             print(i.password)
             print("\n\n")
@@ -216,7 +218,7 @@ def esqueceu():
         user = Usuario.query.filter_by(email=email).first()
         
         #Printando no terminal só pra ver se ele consegue 'puxar' os dados do frontend
-        print(user.id_user) 
+        print(user.id) 
         print(user.email)
         print(user.password)
 
