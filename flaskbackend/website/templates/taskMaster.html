@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+TaskMaster - Gerenciamento de Projetos
+{% endblock %}
+
+{% block content %}
+    <h2>Gerenciamento de Projetos</h2>
+
+    <form id= "criarProjeto" method="POST" action="{{ url_for('auth.adicionar_projeto') }}">
+        <input type="text" name="project_name" placeholder="Nome do Projeto">
+        <button type="submit">Criar Projeto</button>
+    </form>
+
+    
+    <h3>Projetos</h3>
+    <table id="botoesProjetos">
+        <tr>
+            <th>Nome do Projeto</th>
+            <th>Ações</th>
+        </tr>
+        {% for projeto in projects %}
+        <tr>
+            <td>{{ projeto.nome_projeto }}</td>
+            <td>
+                <a href="/projeto/{{ projeto.id_projeto }}" class="btn btn-primary">Gerenciar</a>
+                <a href="/editar_projeto/{{ projeto.id_projeto }}" class="btn btn-warning">Editar</a>
+                <a href="/deletar_projeto/{{ projeto.id_projeto }}" class="btn btn-danger">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
