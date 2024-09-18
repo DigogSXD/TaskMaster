@@ -13,3 +13,10 @@ class Project(db.Model):
     nome_projeto = db.Column(db.String(100), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('usuario.id_user'))  # Chave estrangeira referenciando Usuario
     
+class Task(db.Model):
+    id_task = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(255), nullable=False)
+    status = db.Column(db.String(50), nullable=False)  # Ex: 'Pré-requisitos', 'Em Produção', 'Concluído'
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id_projeto'))  # Chave estrangeira para Project
+
+    project = db.relationship('Project', backref='tasks')  # Relacionamento inverso com Project

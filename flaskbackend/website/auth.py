@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request,flash,redirect,url_for
+from flask import Blueprint, render_template, request,flash,redirect,url_for,login_required,current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
 from .models import Usuario ,Project
@@ -32,24 +32,37 @@ def login():
 
     return render_template('login.html')
 
-@auth.route('/home',methods = ['POST','GET'])
+@auth.route('/home', methods=['POST', 'GET'])
+@login_required  # Assegura que o usuário esteja logado
 def home():
     if request.method == 'POST':
-        dados = request.form 
-        print(dados)
-        
-        nome_projeto = dados.get('id')
-        projeto = Project.query.filter_by(nome_projeto = nome_projeto ).first()
-        if projeto:
-            flash("Já existe um projeto com esse nome",category = 'error')
+        # Pega os dados do formulário
+        nome_projeto = request.form.get('projeto')  # Nome correto do input no HTML
+
+        # Verifica se o nome do projeto foi fornecido
+        if not nome_projeto:
+            flash('O nome do projeto é obrigatório.', category='error')
             return redirect(url_for('auth.home'))
+
+        # Verifica se o projeto já existe para o usuário logado
+        projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto, user_id=current_user.id_user).first()
+
+        if projeto_existente:
+            flash("Já existe um projeto com esse nome", category='error')
         else:
-            projeto_novo = Project(nome_projeto = nome_projeto)
+            # Cria um novo projeto vinculado ao usuário logado
+            projeto_novo = Project(nome_projeto=nome_projeto, user_id=current_user.id_user)
             db.session.add(projeto_novo)
             db.session.commit()
+            flash('Projeto criado com sucesso!', category='success')
 
+        return redirect(url_for('auth.home'))
 
-    return render_template('taskMaster.html')
+    # Se for uma requisição GET, lista os projetos do usuário logado
+    projetos = Project.query.filter_by(user_id=current_user.id_user).all()
+    
+    return render_template('taskMaster.html', projects=projetos)
+
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -99,18 +112,72 @@ def sobre():
 projects = {}
 
 
-@auth.route('/projeto/<int:project_id>')
+@auth.route('/projeto/<int:project_id>', methods=['GET', 'POST'])
+@login_required
 def gerenciar_projeto(project_id):
-    project_name = projects.get(project_id)  # Buscar o nome do projeto pelo ID
-    if not project_name:
-        project_name = "Projeto não encontrado"
-    return render_template('project_details.html', project_name=project_name)
+    projeto = Project.query.get_or_404(project_id)
+    
+    if request.method == 'POST':
+        # Salvar as tarefas do projeto (como você já configurou anteriormente)
+        # Aqui você pode receber as tarefas do frontend via AJAX e salvar no banco
+        pass
+    
+    # Renderizar a página com o nome do projeto e as tarefas associadas
+    return render_template('project_details.html', project_name=projeto.nome_projeto)
+
+@auth.route('/editar_projeto/<int:project_id>', methods=['GET', 'POST'])
+@login_required
+def editar_projeto(project_id):
+    projeto = Project.query.get_or_404(project_id)
+    
+    if request.method == 'POST':
+        novo_nome = request.form.get('project_name')
+        
+        if not novo_nome:
+            flash('O nome do projeto não pode ser vazio.', category='error')
+        else:
+            projeto.nome_projeto = novo_nome
+            db.session.commit()
+            flash('Projeto atualizado com sucesso!', category='success')
+            return redirect(url_for('auth.home'))
+    
+    return render_template('editar_projeto.html', projeto=projeto)
+
+@auth.route('/deletar_projeto/<int:project_id>')
+@login_required
+def deletar_projeto(project_id):
+    projeto = Project.query.get_or_404(project_id)
+    
+    # Remover o projeto
+    db.session.delete(projeto)
+    db.session.commit()
+
+    flash('Projeto deletado com sucesso!', category='success')
+    return redirect(url_for('auth.home'))
+
 
 @auth.route('/adicionar_projeto', methods=['POST'])
+@login_required
 def adicionar_projeto():
-    # Adicionar o projeto ao dicionário 'projects'
-    project_name = request.form['project_name']
-    return redirect('/')
+    nome_projeto = request.form.get('project_name')
+    
+    if not nome_projeto:
+        flash('O nome do projeto é obrigatório.', category='error')
+        return redirect(url_for('auth.home'))
+
+    # Verificar se o projeto já existe
+    projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto).first()
+    if projeto_existente:
+        flash('Já existe um projeto com esse nome.', category='error')
+        return redirect(url_for('auth.home'))
+    
+    # Criar o novo projeto
+    novo_projeto = Project(nome_projeto=nome_projeto, user_id=current_user.id_user)
+    db.session.add(novo_projeto)
+    db.session.commit()
+
+    flash('Projeto criado com sucesso!', category='success')
+    return redirect(url_for('auth.home'))
 
 
 @auth.route('/esqueceu',methods = ['GET','POST'])
