@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user
-from flask_login import LoginManager
+from flask_login import login_required
+from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 
@@ -42,35 +42,33 @@ def login():
 
 
 @auth.route('/home', methods=['POST', 'GET'])
-@login_required  # Assegura que o usuário esteja logado
+@login_required
 def home():
     if request.method == 'POST':
-        # Pega os dados do formulário
-        nome_projeto = request.form.get('projeto')  # Nome correto do input no HTML
+        nome_projeto = request.form.get('projeto')
+        print(f"Nome do projeto recebido: {nome_projeto}")  # Debug
 
-        # Verifica se o nome do projeto foi fornecido
         if not nome_projeto:
             flash('O nome do projeto é obrigatório.', category='error')
             return redirect(url_for('auth.home'))
-
-        # Verifica se o projeto já existe para o usuário logado
+        
         projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto, user_id=current_user.id).first()
 
         if projeto_existente:
             flash("Já existe um projeto com esse nome", category='error')
         else:
-            # Cria um novo projeto vinculado ao usuário logado
             projeto_novo = Project(nome_projeto=nome_projeto, user_id=current_user.id)
             db.session.add(projeto_novo)
-            db.session.commit()
-            flash('Projeto criado com sucesso!', category='success')
+            try:
+                db.session.commit()
+            except Exception as e:
+                print(f"Erro ao salvar no banco de dados: {e}")
+                db.session.rollback()
+                flash('Erro ao salvar o projeto.', category='error')
 
         return redirect(url_for('auth.home'))
 
-    # Se for uma requisição GET, lista os projetos do usuário logado
     projetos = Project.query.filter_by(user_id=current_user.id).all()
-    print(projetos)
-    
     return render_template('taskMaster.html', projects=projetos)
 
 
@@ -90,7 +88,7 @@ def signup():
             flash("Usuário já cadastrado! Faça Login", category='error')
             return redirect(url_for('auth.login'))
 
-        if len(senha) <= 10:
+        if len(senha) < 10:
             flash("A senha deve ter pelo menos 10 caracteres", category='error')
             return redirect(url_for('auth.signup'))
         else:
@@ -107,6 +105,7 @@ def signup():
 
 
 @auth.route('/logout')
+@login_required
 def logout():
     logout_user()  # Encerra a sessão do usuário
     return render_template('login.html')
@@ -114,6 +113,7 @@ def logout():
 
 
 @auth.route('/sobre')
+@login_required
 def sobre():
     return render_template('sobre.html')
 
@@ -179,7 +179,7 @@ def adicionar_projeto():
         return redirect(url_for('auth.home'))
 
     # Verificar se o projeto já existe
-    projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto).first()
+    projeto_existente = Project.query.filter_by(nome_projeto=nome_projeto, user_id=current_user.id).first()
     if projeto_existente:
         flash('Já existe um projeto com esse nome.', category='error')
         return redirect(url_for('auth.home'))
@@ -187,9 +187,14 @@ def adicionar_projeto():
     # Criar o novo projeto
     novo_projeto = Project(nome_projeto=nome_projeto, user_id=current_user.id)
     db.session.add(novo_projeto)
-    db.session.commit()
-
-    flash('Projeto criado com sucesso!', category='success')
+    try:
+        db.session.commit()
+        flash('Projeto criado com sucesso!', category='success')
+    except Exception as e:
+        db.session.rollback()
+        print(f"Erro ao salvar o projeto: {e}")  # Debug
+        flash('Erro ao salvar o projeto.', category='error')
+        flash('Projeto criado com sucesso!', category='success')
     return redirect(url_for('auth.home'))
 
 

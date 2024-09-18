@@ -13,6 +13,7 @@ def create_app():
 
     db.init_app(app)
 
+    
     from .views import views
     from .auth import auth
 
@@ -30,8 +31,10 @@ def create_app():
 
     # Função para carregar o usuário a partir do banco de dados
     @login_manager.user_loader
-    def load_user(user_id):
-        return Usuario.query.get(int(user_id))
+    def load_user(id):
+        return Usuario.query.get(int(id))
+    
+    
 
     return app
 
