@@ -167,6 +167,8 @@ header ul li a {
     transition: background-color 0.3s ease;
     text-align: center;
     margin-right: 5px;
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda */
 }
 
 .btn-primary {
@@ -190,8 +192,28 @@ header ul li a {
 .btn-danger {
     background-color: #e74c3c;
     color: white;
+    border: none;
 }
 
 .btn-danger:hover {
     background-color: #c0392b;
 }
+
+.btn-envicom {
+    background-color: #4CAF50; /* Defina a cor de fundo que você deseja */
+}
+
+.btn-envicom:hover {
+    background-color: #45a049; /* Cor quando o mouse estiver sobre o botão */
+}
+
+
+.btn-compartilhar {
+    background-color: #13a568; /* Defina a cor de fundo que você deseja */
+}
+
+.btn-compartilhar:hover {
+    background-color: #1a671e; /* Cor quando o mouse estiver sobre o botão */
+}
+
+

@@ -293,3 +293,12 @@ def atualizar_tarefas():
             db.session.commit()
 
     return jsonify({'success': True}), 200
+
+# Preisa arrumar aqui kk ta tudo errado do q eu fiz ai, fiz isso so pra ver o botao, Boa sorte kk
+
+@auth.route('/compartilhar_projeto/<int:project_id>', methods=['POST'])
+@login_required
+def compartilhar_projeto(project_id):
+    # Sua lógica para compartilhar o projeto
+    return render_template('taskMaster.html')
+
