@@ -36,7 +36,7 @@ TaskMaster - Gerenciamento de Projetos
                 <!-- Formulário de compartilhamento escondido -->
                 <div id="compartilhar-form-{{ projeto.id }}" style="display:none; margin-top: 10px;">
                     <form method="POST" action="{{ url_for('auth.compartilhar_projeto', project_id=projeto.id) }}">
-                        <input type="email" name="email" placeholder="Digite o email" required style="padding: 5px; margin-right: 5px;">
+                        <input type="email" name="emailShare" placeholder="Digite o email" required style="padding: 5px; margin-right: 5px;">
                         <button type="submit" class="btn btn-envicom">Enviar</button>
                     </form>
                     

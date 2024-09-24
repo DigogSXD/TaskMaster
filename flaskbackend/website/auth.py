@@ -3,7 +3,7 @@ from flask_login import login_required
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
-from .models import Task, Project
+from .models import Usuario, Task, Project, RelUsuarioProject
 from flask import jsonify, request
 
 
@@ -295,10 +295,33 @@ def atualizar_tarefas():
     return jsonify({'success': True}), 200
 
 # Preisa arrumar aqui kk ta tudo errado do q eu fiz ai, fiz isso so pra ver o botao, Boa sorte kk
-
 @auth.route('/compartilhar_projeto/<int:project_id>', methods=['POST'])
 @login_required
 def compartilhar_projeto(project_id):
-    # Sua lógica para compartilhar o projeto
-    return render_template('taskMaster.html')
+    email = request.form.get('emailShare')
+    
+    if not email:
+        flash("Email não recebido.", category="error")
+        return redirect(url_for('auth.home'))
+    
+    usuario = Usuario.query.filter_by(email=email).first()
 
+    if not usuario:
+        flash("Usuário inexistente", category="error")
+        return redirect(url_for('auth.home'))
+    
+    # Verificar se o relacionamento já existe
+    relacao_existente = RelUsuarioProject.query.filter_by(user_id=usuario.id, project_id=project_id).first()
+
+    if relacao_existente:
+        flash(f'O usuário {usuario.email} já faz parte deste projeto.', category="info")
+        return redirect(url_for('auth.home'))
+    else:
+        # Criar novo relacionamento
+        nova_relacao = RelUsuarioProject(user_id=usuario.id, project_id=project_id)
+        db.session.add(nova_relacao)
+        db.session.commit()
+        flash(f'O usuário {usuario.email} foi adicionado ao projeto com sucesso.', category="success")
+        return redirect(url_for('auth.home'))
+    
+    return render_template('taskMaster.html')
