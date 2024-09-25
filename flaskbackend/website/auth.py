@@ -5,6 +5,7 @@ from flask_login import login_user
 from flask_login import logout_user
 from .models import Usuario, Task, Project, RelUsuarioProject
 from flask import jsonify, request
+from datetime import datetime
 
 
 
@@ -134,7 +135,6 @@ projects = {}
 
 
 # Projeto e Task
-
 @auth.route('/projeto/<int:project_id>', methods=['GET', 'POST'])
 @login_required
 def gerenciar_projeto(project_id):
@@ -145,14 +145,23 @@ def gerenciar_projeto(project_id):
         task_status = request.form.get('task_status')
         importance = int(request.form.get('importance'))  # Captura o valor de importância
         ease = int(request.form.get('ease'))  # Captura o valor de facilidade
+        completion_date = request.form.get('completion_date')  # Captura a data de conclusão
+
+        # Verifica se a data de conclusão foi fornecida
+        if completion_date:
+            try:
+                completion_date = datetime.strptime(completion_date, '%Y-%m-%d').date()
+            except ValueError:
+                flash('Data de conclusão inválida. Use o formato YYYY-MM-DD.', 'error')
+                return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
         if task_name and task_status and importance and ease:
             # Calcular a prioridade
             priority = importance * ease
 
-            # Criar nova tarefa com prioridade
+            # Criar nova tarefa com data de conclusão
             nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id,
-                               importance=importance, ease=ease, priority=priority)
+                               importance=importance, ease=ease, priority=priority, completion_date=completion_date)
             db.session.add(nova_tarefa)
             db.session.commit()
             flash('Tarefa adicionada com sucesso!', 'success')
@@ -162,9 +171,9 @@ def gerenciar_projeto(project_id):
         return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
     # Obter tarefas por categoria
-    prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').all()
-    in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').all()
-    completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').all()
+    prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').order_by(Task.priority.desc()).all()
+    in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').order_by(Task.priority.desc()).all()
+    completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').order_by(Task.priority.desc()).all()
 
     return render_template('project_details.html', project=projeto,
                            prereq_tasks=prereq_tasks, in_prod_tasks=in_prod_tasks, 

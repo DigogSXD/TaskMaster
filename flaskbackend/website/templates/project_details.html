@@ -14,14 +14,18 @@ TaskMaster - Gerenciamento de Tarefas
             <ul id="prerequisites" class="kanban-list" ondrop="drop(event, 'Pré-requisitos')" ondragover="allowDrop(event)">
                 <!-- Renderizar tarefas pré-requisitos -->
                 {% for tarefa in prereq_tasks %}
-                    <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                        {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
-                        <!-- Botão para deletar -->
-                        <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
-                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
-                        </form>
-                    </li>
-                {% endfor %}
+                <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
+                    {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                    {% if tarefa.completion_date %}
+                        - Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}
+                    {% endif %}
+                    <!-- Botão para deletar -->
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                    </form>
+                </li>
+            {% endfor %}
+
             </ul>
             
 
@@ -40,7 +44,7 @@ TaskMaster - Gerenciamento de Tarefas
                     <button type="button" class="importance-btn max" data-value="13">13</button>
                 </div>
                 <input type="hidden" name="importance" id="importance" required>
-
+            
                 <!-- Seleção de Facilidade com Botões Coloridos -->
                 <label for="ease">Facilidade:</label>
                 <div class="selection-buttons" id="ease-buttons">
@@ -51,10 +55,14 @@ TaskMaster - Gerenciamento de Tarefas
                     <button type="button" class="ease-btn max" data-value="13">13</button>
                 </div>
                 <input type="hidden" name="ease" id="ease" required>
-
+            
+                <!-- Campo para Data de Conclusão -->
+                <label for="completion_date">Data de Conclusão:</label>
+                <input type="date" name="completion_date">
+            
                 <button type="submit">Adicionar</button>
             </form>
-
+            
         </div>
 
         <!-- Coluna Em Produção -->

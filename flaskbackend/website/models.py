@@ -1,5 +1,6 @@
 from . import db
 from flask_login import UserMixin
+from datetime import datetime
 
 # Modelo de Usuário
 class Usuario(db.Model, UserMixin):
@@ -39,6 +40,7 @@ class Task(db.Model):
     importance = db.Column(db.Integer, nullable=False)  # Valores de 1, 3, 5, 8 ou 13
     ease = db.Column(db.Integer, nullable=False)        # Valores de 1, 3, 5, 8 ou 13
     priority = db.Column(db.Integer, nullable=False)    # Calculado como importance * ease
+    completion_date = db.Column(db.Date, nullable=True)  # Nova coluna para data de conclusão, pode ser nula
 
     # Relacionamento com Project
     project = db.relationship('Project', backref='tasks')  # Relacionamento inverso com Project
