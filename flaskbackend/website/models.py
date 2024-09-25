@@ -27,7 +27,7 @@ class RelUsuarioProject(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
 
-
+# A tabela da task
 
 class Task(db.Model):
     id_task = db.Column(db.Integer, primary_key=True)
@@ -35,4 +35,10 @@ class Task(db.Model):
     status = db.Column(db.String(50), nullable=False)  # Ex: 'Pré-requisitos', 'Em Produção', 'Concluído'
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))  # Chave estrangeira para Project
 
+    # Novos campos para importância, facilidade e prioridade
+    importance = db.Column(db.Integer, nullable=False)  # Valores de 1, 3, 5, 8 ou 13
+    ease = db.Column(db.Integer, nullable=False)        # Valores de 1, 3, 5, 8 ou 13
+    priority = db.Column(db.Integer, nullable=False)    # Calculado como importance * ease
+
+    # Relacionamento com Project
     project = db.relationship('Project', backref='tasks')  # Relacionamento inverso com Project

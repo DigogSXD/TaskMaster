@@ -73,3 +73,93 @@ button:hover {
     background-color: #45a049; /* cor ao passar o mouse */
   }
   
+
+  /* Cores de fundo de acordo com a prioridade */
+  .selection-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.selection-buttons button {
+    flex-grow: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Cores específicas para os botões */
+.selection-buttons .low {
+    background-color: #d9534f; /* Vermelho */
+}
+
+.selection-buttons .medium {
+    background-color: #f0ad4e; /* Laranja */
+}
+
+.selection-buttons .high {
+    background-color: #5cb85c; /* Verde */
+}
+
+.selection-buttons .very-high {
+    background-color: #0275d8; /* Azul */
+}
+
+.selection-buttons .max {
+    background-color: #292b2c; /* Preto */
+}
+
+/* Quando um botão é selecionado */
+.selection-buttons button.selected {
+    border: 2px solid #000;
+    opacity: 1;
+}
+
+/* Efeito hover */
+.selection-buttons button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo do modal de edição */
+#editTaskModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+}
+
+.modal-content button {
+    margin-top: 10px;
+}

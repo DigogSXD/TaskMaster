@@ -99,3 +99,60 @@ document.getElementById('SalvarProj').addEventListener('click', function() {
         console.error('Erro ao salvar tarefas:', error);
     });
 });
+
+
+
+
+
+
+
+
+// Facilidade e importancia
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Função para atualizar a seleção de Importância
+    const importanceButtons = document.querySelectorAll('.importance-btn');
+    importanceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove a classe 'selected' de todos os botões
+            importanceButtons.forEach(btn => btn.classList.remove('selected'));
+            // Adiciona a classe 'selected' ao botão clicado
+            this.classList.add('selected');
+            // Atualiza o valor do input hidden de importância
+            document.getElementById('importance').value = this.getAttribute('data-value');
+        });
+    });
+
+    // Função para atualizar a seleção de Facilidade
+    const easeButtons = document.querySelectorAll('.ease-btn');
+    easeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove a classe 'selected' de todos os botões
+            easeButtons.forEach(btn => btn.classList.remove('selected'));
+            // Adiciona a classe 'selected' ao botão clicado
+            this.classList.add('selected');
+            // Atualiza o valor do input hidden de facilidade
+            document.getElementById('ease').value = this.getAttribute('data-value');
+        });
+    });
+
+    // Verificar se os valores foram selecionados antes de enviar o formulário de criação/edição de tarefas
+    document.querySelectorAll('form').forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            // Verifica se o formulário contém campos de importância e facilidade
+            const importanceInput = form.querySelector('#importance');
+            const easeInput = form.querySelector('#ease');
+
+            // Se o formulário tiver os campos de importância e facilidade, validá-los
+            if (importanceInput && easeInput) {
+                const importance = importanceInput.value;
+                const ease = easeInput.value;
+
+                if (importance === '' || ease === '') {
+                    event.preventDefault();  // Impede o envio do formulário
+                    alert('Por favor, selecione a Importância e a Facilidade.');
+                }
+            }
+        });
+    });
+});

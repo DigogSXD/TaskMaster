@@ -127,6 +127,9 @@ def sobre():
 projects = {}
 
 
+
+# Projeto e Task
+
 @auth.route('/projeto/<int:project_id>', methods=['GET', 'POST'])
 @login_required
 def gerenciar_projeto(project_id):
@@ -135,14 +138,21 @@ def gerenciar_projeto(project_id):
     if request.method == 'POST':
         task_name = request.form.get('task_name')
         task_status = request.form.get('task_status')
+        importance = int(request.form.get('importance'))  # Captura o valor de importância
+        ease = int(request.form.get('ease'))  # Captura o valor de facilidade
 
-        if task_name and task_status:
-            nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id)
+        if task_name and task_status and importance and ease:
+            # Calcular a prioridade
+            priority = importance * ease
+
+            # Criar nova tarefa com prioridade
+            nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id,
+                               importance=importance, ease=ease, priority=priority)
             db.session.add(nova_tarefa)
             db.session.commit()
             flash('Tarefa adicionada com sucesso!', 'success')
         else:
-            flash('O nome da tarefa não pode ser vazio.', 'error')
+            flash('Todos os campos são obrigatórios.', 'error')
 
         return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
@@ -151,11 +161,9 @@ def gerenciar_projeto(project_id):
     in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').all()
     completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').all()
 
-    # Passando o objeto 'projeto' para o template
     return render_template('project_details.html', project=projeto,
                            prereq_tasks=prereq_tasks, in_prod_tasks=in_prod_tasks, 
                            completed_tasks=completed_tasks)
-
 
 
 @auth.route('/editar_projeto/<int:project_id>', methods=['GET', 'POST'])
@@ -294,7 +302,7 @@ def atualizar_tarefas():
 
     return jsonify({'success': True}), 200
 
-# Preisa arrumar aqui kk ta tudo errado do q eu fiz ai, fiz isso so pra ver o botao, Boa sorte kk
+# COMPARTILHAR
 @auth.route('/compartilhar_projeto/<int:project_id>', methods=['POST'])
 @login_required
 def compartilhar_projeto(project_id):
@@ -325,3 +333,57 @@ def compartilhar_projeto(project_id):
         return redirect(url_for('auth.home'))
     
     return render_template('taskMaster.html')
+
+# BOTOES DELETAR TASK
+
+@auth.route('/deletar_tarefa/<int:task_id>/<int:project_id>', methods=['POST'])
+@login_required
+def deletar_tarefa(task_id, project_id):
+    # Buscar a tarefa pelo ID
+    tarefa = Task.query.get_or_404(task_id)
+    
+    try:
+        # Deletar a tarefa do banco de dados
+        db.session.delete(tarefa)
+        db.session.commit()
+        flash('Tarefa deletada com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Erro ao deletar a tarefa.', 'error')
+
+    # Redirecionar para a página do projeto
+    return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+
+
+
+
+
+
+
+
+
+#EDITAR TAREFA
+@auth.route('/editar_tarefa/<int:project_id>', methods=['POST'])
+@login_required
+def editar_tarefa(project_id):
+    task_id = request.form.get('task_id')
+    task_name = request.form.get('task_name')
+    importance = request.form.get('importance')
+    ease = request.form.get('ease')
+
+    # Buscar a tarefa no banco de dados
+    tarefa = Task.query.get_or_404(task_id)
+
+    # Atualizar os dados da tarefa
+    tarefa.description = task_name
+    tarefa.importance = importance
+    tarefa.ease = ease
+
+    try:
+        db.session.commit()
+        flash('Tarefa atualizada com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Erro ao atualizar a tarefa.', 'error')
+
+    return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))

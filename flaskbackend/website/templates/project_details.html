@@ -15,15 +15,46 @@ TaskMaster - Gerenciamento de Tarefas
                 <!-- Renderizar tarefas pré-requisitos -->
                 {% for tarefa in prereq_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                        {{ tarefa.description }}
+                        {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        <!-- Botão para deletar -->
+                        <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>
+            
+
+            <!-- Formulário para adicionar nova tarefa em Pré-requisitos -->
             <form method="POST" action="{{ url_for('auth.gerenciar_projeto', project_id=project.id) }}">
                 <input type="text" name="task_name" placeholder="Nova tarefa" required>
                 <input type="hidden" name="task_status" value="Pré-requisitos">
+                
+                <!-- Seleção de Importância com Botões Coloridos -->
+                <label for="importance">Importância:</label>
+                <div class="selection-buttons" id="importance-buttons">
+                    <button type="button" class="importance-btn low" data-value="1">1</button>
+                    <button type="button" class="importance-btn medium" data-value="3">3</button>
+                    <button type="button" class="importance-btn high" data-value="5">5</button>
+                    <button type="button" class="importance-btn very-high" data-value="8">8</button>
+                    <button type="button" class="importance-btn max" data-value="13">13</button>
+                </div>
+                <input type="hidden" name="importance" id="importance" required>
+
+                <!-- Seleção de Facilidade com Botões Coloridos -->
+                <label for="ease">Facilidade:</label>
+                <div class="selection-buttons" id="ease-buttons">
+                    <button type="button" class="ease-btn low" data-value="1">1</button>
+                    <button type="button" class="ease-btn medium" data-value="3">3</button>
+                    <button type="button" class="ease-btn high" data-value="5">5</button>
+                    <button type="button" class="ease-btn very-high" data-value="8">8</button>
+                    <button type="button" class="ease-btn max" data-value="13">13</button>
+                </div>
+                <input type="hidden" name="ease" id="ease" required>
+
                 <button type="submit">Adicionar</button>
-            </form>            
+            </form>
+
         </div>
 
         <!-- Coluna Em Produção -->
@@ -33,15 +64,17 @@ TaskMaster - Gerenciamento de Tarefas
                 <!-- Renderizar tarefas em produção -->
                 {% for tarefa in in_prod_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                        {{ tarefa.description }}
+                        {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        <!-- Botão para deletar -->
+                        <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>
-            <form method="POST" action="{{ url_for('auth.gerenciar_projeto', project_id=project.id) }}">
-                <input type="text" name="task_name" placeholder="Nova tarefa" required>
-                <input type="hidden" name="task_status" value="Em Produção">
-                <button type="submit">Adicionar</button>
-            </form>
+            
+
+            
         </div>
 
         <!-- Coluna Concluído -->
@@ -51,20 +84,22 @@ TaskMaster - Gerenciamento de Tarefas
                 <!-- Renderizar tarefas concluídas -->
                 {% for tarefa in completed_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                        {{ tarefa.description }}
+                        {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        <!-- Botão para deletar -->
+                        <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>
-            <form method="POST" action="{{ url_for('auth.gerenciar_projeto', project_id=project.id) }}">
-                <input type="text" name="task_name" placeholder="Nova tarefa" required>
-                <input type="hidden" name="task_status" value="Concluído">
-                <button type="submit">Adicionar</button>
-            </form>
+            
+
+       
+            
         </div>
     </div>
 
     <button id="SalvarProj">Salvar</button>
-
 
 {% endblock %}
 
