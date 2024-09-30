@@ -143,11 +143,11 @@ def gerenciar_projeto(project_id):
     if request.method == 'POST':
         task_name = request.form.get('task_name')
         task_status = request.form.get('task_status')
-        importance = int(request.form.get('importance'))  # Captura o valor de importância
-        ease = int(request.form.get('ease'))  # Captura o valor de facilidade
-        completion_date = request.form.get('completion_date')  # Captura a data de conclusão
+        importance = int(request.form.get('importance'))
+        ease = int(request.form.get('ease'))
+        completion_date = request.form.get('completion_date')
+        comment = request.form.get('comment')  # Captura o comentário
 
-        # Verifica se a data de conclusão foi fornecida
         if completion_date:
             try:
                 completion_date = datetime.strptime(completion_date, '%Y-%m-%d').date()
@@ -156,12 +156,12 @@ def gerenciar_projeto(project_id):
                 return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
         if task_name and task_status and importance and ease:
-            # Calcular a prioridade
             priority = importance * ease
 
-            # Criar nova tarefa com data de conclusão
+            # Criar nova tarefa com comentário
             nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id,
-                               importance=importance, ease=ease, priority=priority, completion_date=completion_date)
+                               importance=importance, ease=ease, priority=priority,
+                               completion_date=completion_date, comment=comment)
             db.session.add(nova_tarefa)
             db.session.commit()
             flash('Tarefa adicionada com sucesso!', 'success')
@@ -169,6 +169,14 @@ def gerenciar_projeto(project_id):
             flash('Todos os campos são obrigatórios.', 'error')
 
         return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+
+    prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').order_by(Task.priority.desc()).all()
+    in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').order_by(Task.priority.desc()).all()
+    completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').order_by(Task.priority.desc()).all()
+
+    return render_template('project_details.html', project=projeto,
+                           prereq_tasks=prereq_tasks, in_prod_tasks=in_prod_tasks, 
+                           completed_tasks=completed_tasks)
 
     # Obter tarefas por categoria
     prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').order_by(Task.priority.desc()).all()

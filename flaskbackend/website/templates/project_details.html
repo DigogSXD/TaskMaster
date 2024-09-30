@@ -19,6 +19,9 @@ TaskMaster - Gerenciamento de Tarefas
                     {% if tarefa.completion_date %}
                         - Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}
                     {% endif %}
+                    {% if tarefa.comment %}
+                        - Comentário: {{ tarefa.comment }}
+                    {% endif %}
                     <!-- Botão para deletar -->
                     <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
@@ -59,6 +62,10 @@ TaskMaster - Gerenciamento de Tarefas
                 <!-- Campo para Data de Conclusão -->
                 <label for="completion_date">Data de Conclusão:</label>
                 <input type="date" name="completion_date">
+
+                <!-- Campo para Comentário -->
+                <label for="comment">Comentário:</label>
+                <textarea name="comment" placeholder="Adicione um comentário..."></textarea>
             
                 <button type="submit">Adicionar</button>
             </form>
@@ -73,6 +80,9 @@ TaskMaster - Gerenciamento de Tarefas
                 {% for tarefa in in_prod_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
                         {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        {% if tarefa.comment %}
+                            - Comentário: {{ tarefa.comment }}
+                        {% endif %}
                         <!-- Botão para deletar -->
                         <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                             <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
@@ -80,9 +90,6 @@ TaskMaster - Gerenciamento de Tarefas
                     </li>
                 {% endfor %}
             </ul>
-            
-
-            
         </div>
 
         <!-- Coluna Concluído -->
@@ -93,6 +100,9 @@ TaskMaster - Gerenciamento de Tarefas
                 {% for tarefa in completed_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
                         {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        {% if tarefa.comment %}
+                            - Comentário: {{ tarefa.comment }}
+                        {% endif %}
                         <!-- Botão para deletar -->
                         <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                             <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
@@ -100,10 +110,6 @@ TaskMaster - Gerenciamento de Tarefas
                     </li>
                 {% endfor %}
             </ul>
-            
-
-       
-            
         </div>
     </div>
 

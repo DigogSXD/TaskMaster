@@ -28,19 +28,18 @@ class RelUsuarioProject(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
 
-# A tabela da task
 
+# A tabela da task
 class Task(db.Model):
     id_task = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(255), nullable=False)
-    status = db.Column(db.String(50), nullable=False)  # Ex: 'Pré-requisitos', 'Em Produção', 'Concluído'
-    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))  # Chave estrangeira para Project
+    status = db.Column(db.String(50), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
 
-    # Novos campos para importância, facilidade e prioridade
-    importance = db.Column(db.Integer, nullable=False)  # Valores de 1, 3, 5, 8 ou 13
-    ease = db.Column(db.Integer, nullable=False)        # Valores de 1, 3, 5, 8 ou 13
-    priority = db.Column(db.Integer, nullable=False)    # Calculado como importance * ease
-    completion_date = db.Column(db.Date, nullable=True)  # Nova coluna para data de conclusão, pode ser nula
+    importance = db.Column(db.Integer, nullable=False)
+    ease = db.Column(db.Integer, nullable=False)
+    priority = db.Column(db.Integer, nullable=False)
+    completion_date = db.Column(db.Date, nullable=True)
 
-    # Relacionamento com Project
-    project = db.relationship('Project', backref='tasks')  # Relacionamento inverso com Project
+    # Nova coluna para o comentário
+    comment = db.Column(db.String(500), nullable=True)  # Comentário opcional
