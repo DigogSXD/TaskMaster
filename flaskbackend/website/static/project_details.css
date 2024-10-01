@@ -1,0 +1,168 @@
+/* Estilo geral do Kanban */
+.kanban-board {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.kanban-column {
+    width: 30%;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.kanban-column h3 {
+    text-align: center;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.kanban-list {
+    list-style-type: none;
+    padding: 0;
+    min-height: 200px;
+}
+
+.kanban-list li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#SalvarProj {
+    background-color: #4CAF50; /* cor de fundo */
+    color: white; /* cor do texto */
+    border: none; /* sem borda */
+    padding: 10px 20px; /* espaçamento interno */
+    text-align: center; /* alinhamento do texto */
+    text-decoration: none; /* remover sublinhado se for link */
+    display: block; /* necessário para que margin auto funcione */
+    font-size: 16px; /* tamanho da fonte */
+    margin: 20px auto; /* centraliza horizontalmente */
+    cursor: pointer; /* cursor de mãozinha ao passar o mouse */
+    border-radius: 5px; /* cantos arredondados */
+    width: auto; /* Definir a largura para automática */
+  }
+  
+  #SalvarProj:hover {
+    background-color: #45a049; /* cor ao passar o mouse */
+  }
+  
+
+  /* Cores de fundo de acordo com a prioridade */
+  .selection-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.selection-buttons button {
+    flex-grow: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Cores específicas para os botões */
+.selection-buttons .low {
+    background-color: #d9534f; /* Vermelho */
+}
+
+.selection-buttons .medium {
+    background-color: #f0ad4e; /* Laranja */
+}
+
+.selection-buttons .high {
+    background-color: #5cb85c; /* Verde */
+}
+
+.selection-buttons .very-high {
+    background-color: #0275d8; /* Azul */
+}
+
+.selection-buttons .max {
+    background-color: #292b2c; /* Preto */
+}
+
+/* Quando um botão é selecionado */
+.selection-buttons button.selected {
+    border: 2px solid #000;
+    opacity: 1;
+}
+
+#deletar {
+    background-color: #d9534f;
+}
+/* Efeito hover */
+.selection-buttons button:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo do modal de edição */
+#editTaskModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+}
+
+.modal-content button {
+    margin-top: 10px;
+}
