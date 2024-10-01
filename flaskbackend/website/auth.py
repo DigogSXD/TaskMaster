@@ -257,54 +257,43 @@ def esqueceu():
     nova_senha2 = request.form.get('senha2')
 
     if request.method == 'POST':
-        """
-        É aqui que eu tentei inicialmente fazer um teste pra vizualizar td
-            Deu certo, mas não consegui fazer em outro arquivo
         
-        users = Usuario.query.all()
-        
-        for i in list(users):
-            print(i.id)
-            print(i.email)
-            print(i.password)
-            print("\n\n")
-        """
-        
-        """Aqui estou fazendo a lógica normal da página de esqueceu a senha(não precisa alterar nada, tá funfando)"""
+        # Busca o usuário no banco de dados
         user = Usuario.query.filter_by(email=email).first()
-        
-        #Printando no terminal só pra ver se ele consegue 'puxar' os dados do frontend
-        print(user.id) 
-        print(user.email)
-        print(user.password)
 
         if not user:
             flash("Usuário inexistente! Faça cadastro", category='error')
             return redirect(url_for('auth.signup'))
-        else:    
-            if nova_senha != nova_senha2:
-                flash("As senhas devem ser iguais")
-                return redirect(url_for('auth.esqueceu'))
-            if len(nova_senha) < 10:
-                flash("A nova senha deve ter no mínimo 10 caracteres")
-                return redirect(url_for('auth.esqueceu.html'))
-            else:
-                # Atualizar a senha do usuário
-                user.password = generate_password_hash(nova_senha, method='pbkdf2:sha256')
 
-                # Commit da nova senha no banco de dados
-                try:
-                    db.session.commit()
-                    flash("Senha alterada com sucesso!", category='success')
-                    return redirect(url_for('auth.login'))
-                except Exception as e:
-                    db.session.rollback()
-                    flash(f"""Erro ao atualizar a senha: {str(e)} 
-                          Tente denovo""", category='error')
-                    return redirect(url_for('auth.esqueceu'))
+        # Agora que já verificamos se o usuário existe, podemos acessar seus atributos
+        print(user.id) 
+        print(user.email)
+        print(user.password)
+
+        # Verifica se as senhas são iguais
+        if nova_senha != nova_senha2:
+            flash("As senhas devem ser iguais")
+            return redirect(url_for('auth.esqueceu'))
+        
+        # Verifica se a nova senha tem no mínimo 10 caracteres
+        if len(nova_senha) < 10:
+            flash("A nova senha deve ter no mínimo 10 caracteres")
+            return redirect(url_for('auth.esqueceu'))
+        
+        # Atualizar a senha do usuário
+        user.password = generate_password_hash(nova_senha, method='pbkdf2:sha256')
+
+        # Commit da nova senha no banco de dados
+        try:
+            db.session.commit()
+            flash("Senha alterada com sucesso!", category='success')
+            return redirect(url_for('auth.login'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f"""Erro ao atualizar a senha: {str(e)}. Tente de novo""", category='error')
+            return redirect(url_for('auth.esqueceu'))
 
     return render_template('esqueceu.html')
-
 
 # Atualizar TAREFA
 @auth.route('/atualizar_tarefas', methods=['POST'])

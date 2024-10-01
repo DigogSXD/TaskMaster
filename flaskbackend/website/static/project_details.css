@@ -166,3 +166,134 @@ button:hover {
 .modal-content button {
     margin-top: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para a conclusão e comentário dentro das tarefas */
+.kanban-list li .completion, .kanban-list li .comment {
+    font-size: 0.9rem; /* Tamanho da fonte ligeiramente menor */
+    color: #555; /* Cor de texto suave */
+    margin-top: 5px; /* Espaçamento superior */
+    display: block; /* Exibir em bloco para separar do restante */
+}
+
+/* Destaque para o texto de conclusão */
+.kanban-list li .completion {
+    font-weight: bold; /* Negrito para o texto de conclusão */
+    color: #28a745; /* Cor verde para indicar tarefa concluída */
+}
+
+/* Estilo para o comentário */
+.kanban-list li .comment {
+    font-style: italic; /* Texto em itálico para os comentários */
+    color: #6c757d; /* Cor cinza suave */
+}
+
+/* Estilo do botão deletar */
+#deletar {
+    background-color: #d9534f; /* Vermelho de alerta */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#deletar:hover {
+    background-color: #c9302c; /* Cor mais escura ao passar o mouse */
+}
+
+/* Adicionar mais espaçamento e destaque visual entre as tarefas */
+.kanban-list li {
+    margin-bottom: 15px; /* Espaçamento entre as tarefas */
+    padding: 15px; /* Mais espaço interno */
+    border-left: 5px solid #007bff; /* Borda de cor azul na esquerda para destaque */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para os labels */
+.form-label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilo para o campo de data */
+#completion_date {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f4f4f9;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease-in-out;
+}
+
+#completion_date:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estilo para o campo de comentário */
+#comment {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f4f4f9;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease-in-out;
+}
+
+#comment:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Ajustes de espaçamento e estilo */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    outline: none;
+}

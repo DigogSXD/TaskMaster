@@ -17,16 +17,17 @@ TaskMaster - Gerenciamento de Tarefas
                 <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
                     {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
                     {% if tarefa.completion_date %}
-                        - Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}
+                        <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
                     {% endif %}
                     {% if tarefa.comment %}
-                        - Comentário: {{ tarefa.comment }}
+                        <span class="comment">Comentário: {{ tarefa.comment }}</span>
                     {% endif %}
                     <!-- Botão para deletar -->
                     <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                 </li>
+                
             {% endfor %}
 
             </ul>
@@ -60,12 +61,13 @@ TaskMaster - Gerenciamento de Tarefas
                 <input type="hidden" name="ease" id="ease" required>
             
                 <!-- Campo para Data de Conclusão -->
-                <label for="completion_date">Data de Conclusão:</label>
-                <input type="date" name="completion_date">
+                <label for="completion_date" class="form-label">Data de Conclusão:</label>
+                <input type="date" name="completion_date" id="completion_date" class="form-control">
 
                 <!-- Campo para Comentário -->
-                <label for="comment">Comentário:</label>
-                <textarea name="comment" placeholder="Adicione um comentário..."></textarea>
+                <label for="comment" class="form-label">Comentário:</label>
+                <textarea name="comment" id="comment" class="form-control" placeholder="Adicione um comentário..."></textarea>
+
             
                 <button type="submit">Adicionar</button>
             </form>
@@ -80,8 +82,11 @@ TaskMaster - Gerenciamento de Tarefas
                 {% for tarefa in in_prod_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
                         {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        {% if tarefa.completion_date %}
+                            <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                        {% endif %}
                         {% if tarefa.comment %}
-                            - Comentário: {{ tarefa.comment }}
+                            <span class="comment">Comentário: {{ tarefa.comment }}</span>
                         {% endif %}
                         <!-- Botão para deletar -->
                         <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
@@ -100,8 +105,11 @@ TaskMaster - Gerenciamento de Tarefas
                 {% for tarefa in completed_tasks %}
                     <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
                         {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                        {% if tarefa.completion_date %}
+                            <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                        {% endif %}
                         {% if tarefa.comment %}
-                            - Comentário: {{ tarefa.comment }}
+                            <span class="comment">Comentário: {{ tarefa.comment }}</span>
                         {% endif %}
                         <!-- Botão para deletar -->
                         <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
