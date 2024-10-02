@@ -143,22 +143,33 @@ def gerenciar_projeto(project_id):
     if request.method == 'POST':
         task_name = request.form.get('task_name')
         task_status = request.form.get('task_status')
-        importance = int(request.form.get('importance'))
-        ease = int(request.form.get('ease'))
-        completion_date = request.form.get('completion_date')
-        comment = request.form.get('comment')  # Captura o comentário
+        comment = request.form.get('comment')
 
-        if completion_date:
-            try:
-                completion_date = datetime.strptime(completion_date, '%Y-%m-%d').date()
-            except ValueError:
-                flash('Data de conclusão inválida. Use o formato YYYY-MM-DD.', 'error')
-                return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+        # Validação de importância e facilidade
+        try:
+            importance = int(request.form.get('importance'))
+            ease = int(request.form.get('ease'))
+        except (TypeError, ValueError):
+            flash('Valores de importância e facilidade inválidos.', 'error')
+            return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+
+        # Verificar se a data de conclusão foi fornecida
+        completion_date = request.form.get('completion_date')
+        if not completion_date:
+            flash('Data de conclusão é obrigatória.', 'error')
+            return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+
+        # Validação do formato da data de conclusão
+        try:
+            completion_date = datetime.strptime(completion_date, '%Y-%m-%d').date()
+        except ValueError:
+            flash('Data de conclusão inválida. Use o formato YYYY-MM-DD.', 'error')
+            return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
         if task_name and task_status and importance and ease:
             priority = importance * ease
 
-            # Criar nova tarefa com comentário
+            # Criar nova tarefa
             nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id,
                                importance=importance, ease=ease, priority=priority,
                                completion_date=completion_date, comment=comment)
@@ -170,6 +181,7 @@ def gerenciar_projeto(project_id):
 
         return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
+    # Obter tarefas por status
     prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').order_by(Task.priority.desc()).all()
     in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').order_by(Task.priority.desc()).all()
     completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').order_by(Task.priority.desc()).all()
@@ -177,15 +189,9 @@ def gerenciar_projeto(project_id):
     return render_template('project_details.html', project=projeto,
                            prereq_tasks=prereq_tasks, in_prod_tasks=in_prod_tasks, 
                            completed_tasks=completed_tasks)
+    
 
-    # Obter tarefas por categoria
-    prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').order_by(Task.priority.desc()).all()
-    in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').order_by(Task.priority.desc()).all()
-    completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').order_by(Task.priority.desc()).all()
 
-    return render_template('project_details.html', project=projeto,
-                           prereq_tasks=prereq_tasks, in_prod_tasks=in_prod_tasks, 
-                           completed_tasks=completed_tasks)
 
 
 @auth.route('/editar_projeto/<int:project_id>', methods=['GET', 'POST'])
