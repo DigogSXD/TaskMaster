@@ -23,15 +23,17 @@ def login():
         email = data.get('emailLogin')
         senha = data.get('passwordLogin')
 
-        print(email)
-        print(senha)
+        # Verifica se os campos foram preenchidos
+        if not email or not senha:
+            flash("Por favor, preencha todos os campos", category='error')
+            return redirect(url_for('auth.login'))  # Retorna para a tela de login
 
         # Verifica se o usuário existe no banco de dados
         user = Usuario.query.filter_by(email=email).first()
 
         if not user:
             flash("Usuário inexistente! Faça cadastro antes", category='error')
-            return redirect(url_for('auth.signup'))
+            return redirect(url_for('auth.signup'))  # Redireciona para a página de cadastro
         else:
             # Verifica se a senha está correta
             if check_password_hash(user.password, senha):
@@ -40,7 +42,7 @@ def login():
                 # Loga o usuário na sessão
                 login_user(user)
 
-                return redirect(url_for('auth.home'))
+                return redirect(url_for('auth.home'))  # Redireciona para a página principal
             else:
                 flash("Senha incorreta", category='error')
 

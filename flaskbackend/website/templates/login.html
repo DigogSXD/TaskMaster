@@ -5,57 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
 </head>
 <body>
 
-    <!-- Uma div que guarda todo o conteúdo da página -->
     <div class='container'>
         <div class='form-container' id='loginContainer'>
             <form action="/" method="POST" id='loginForm'>
-                <!-- Uma espécie de título para o formulário -->
                 <h2>Login</h2>
                 
                 <div class="mb-3">
-                    <!-- Texto que aparece à esquerda da caixa de input -->
                     <label for="loginEmail" class="form-label">Email:</label>
                     <input type="email" id="loginEmail" class="form-control" name="emailLogin" placeholder="Entre email">
                 </div>
 
                 <div class="input-group">
-                    <!-- Texto que aparece antes da caixa de input senha -->
                     <label for="loginPassword">Senha:</label>
                     <input type="password" id="loginPassword" class="form-control" name="passwordLogin" placeholder="Entre password">
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Login</button>
-
-                <!-- Link estilizado como botão -->
                 <a href="{{ url_for('auth.signup') }}" class="btn btn-secondary" role="button">Ir para Cadastro</a>
                 <a href="{{ url_for('auth.esqueceu') }}" class="btn btn-secondary" role="button">Esqueceu a senha</a>
 
-
-
             {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            {% endwith %}    
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span>&times;</span>
+                                </button>                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
             </form>
         </div>
     </div>
-    <!-- Scripts do Bootstrap (necessário para o funcionamento do botão de fechar nos alerts) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.alert-dismissible .close').on('click', function() {
+                $(this).closest('.alert').fadeOut();
+            });
+        });
+    </script>
 
 </body>
 </html>
