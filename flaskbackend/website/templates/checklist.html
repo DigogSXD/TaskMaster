@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+TaskMaster - Checklist
+{% endblock %}
+
+{% block content %}
+    <h2>Checklist da Tarefa: {{ tarefa.description }}</h2>
+    <h3>Projeto: {{ projeto.nome_projeto }}</h3>
+
+    <div class="checklist-container">
+        <form method="POST" action="{{ url_for('auth.atualizar_checklist', task_id=tarefa.id_task, project_id=projeto.id) }}">
+            <ul class="checklist-items">
+                <!-- Exemplo de itens do checklist (você pode carregar isso do banco de dados ou adicionar dinamicamente) -->
+                {% for item in checklist_items %}
+                <li>
+                    <input type="checkbox" name="item_{{ item.id }}" value="1" {% if item.completed %}checked{% endif %}>
+                    {{ item.description }}
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit">Salvar Checklist</button>
+        </form>
+    </div>
+
+    <!-- Botão para retornar ao projeto -->
+    <a href="{{ url_for('auth.gerenciar_projeto', project_id=projeto.id) }}" class="button-link">Voltar ao Projeto</a>
+
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='checklist.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='checklist.js') }}"></script>
+{% endblock %}

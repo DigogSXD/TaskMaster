@@ -403,3 +403,41 @@ def editar_tarefa(project_id):
         flash('Erro ao atualizar a tarefa.', 'error')
 
     return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+
+
+
+
+
+
+
+
+
+
+
+
+
+#CHECKLIST
+@auth.route('/checklist/<int:task_id>/<int:project_id>', methods=['GET'])
+@login_required
+def checklist(task_id, project_id):
+    # Aqui você pode carregar os dados da tarefa e do projeto conforme necessário
+    tarefa = Task.query.get_or_404(task_id)
+    projeto = Project.query.get_or_404(project_id)
+
+    return render_template('checklist.html', tarefa=tarefa, projeto=projeto)
+
+
+@auth.route('/atualizar_checklist/<int:task_id>/<int:project_id>', methods=['POST'])
+@login_required
+def atualizar_checklist(task_id, project_id):
+    tarefa = Task.query.get_or_404(task_id)
+    checklist_items = request.form.getlist('checklist_items')
+
+    # Atualize o status dos itens do checklist com base na entrada do formulário
+    for item in checklist_items:
+        checklist_item = ChecklistItem.query.get(item['id'])
+        checklist_item.completed = item['completed'] == '1'  # Marcado como concluído
+        db.session.commit()
+
+    flash('Checklist atualizado com sucesso!', 'success')
+    return redirect(url_for('auth.checklist', task_id=task_id, project_id=project_id))

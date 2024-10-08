@@ -177,9 +177,6 @@ button:hover {
 
 
 
-
-
-
 /* Estilo para a conclusão e comentário dentro das tarefas */
 .kanban-list li .completion, .kanban-list li .comment {
     font-size: 0.9rem; /* Tamanho da fonte ligeiramente menor */
@@ -220,7 +217,6 @@ button:hover {
     padding: 15px; /* Mais espaço interno */
     border-left: 5px solid #007bff; /* Borda de cor azul na esquerda para destaque */
 }
-
 
 
 
@@ -296,4 +292,28 @@ button:hover {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
     outline: none;
+}
+
+
+
+
+
+
+
+
+
+/* Estilo do botão Checklist */
+#checklist {
+    background-color: #5bc0de; /* Azul claro para o botão Checklist */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; 
+}
+
+/* Cor mais escura ao passar o mouse */
+#checklist:hover {
+    background-color: #31b0d5; /* Tom mais escuro de azul */
 }

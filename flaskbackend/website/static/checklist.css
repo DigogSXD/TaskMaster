@@ -1,0 +1,72 @@
+
+
+
+
+/* Lista de itens do checklist */
+.checklist-items {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist-items li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.checklist-items li:last-child {
+    border-bottom: none;
+}
+
+/* Estilo dos checkboxes */
+.checklist-items input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.5); /* Deixa o checkbox maior */
+}
+
+/* Estilo para os itens de checklist */
+.checklist-items li label {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Estilo para o botão de salvar */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+
+
+/* Estilo do link como um botão */
+a.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Alteração de cor ao passar o mouse */
+a.button-link:hover {
+    background-color: #0056b3;
+}

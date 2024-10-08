@@ -5,7 +5,7 @@ TaskMaster - Gerenciamento de Tarefas
 {% endblock %}
 
 {% block content %}
-    <h2>Projeto: {{ project_name }}</h2>
+    <h2>Projeto: {{ project.nome_projeto }}</h2>
 
     <div class="kanban-board">
         <!-- Coluna Pré-requisitos -->
@@ -26,12 +26,13 @@ TaskMaster - Gerenciamento de Tarefas
                     <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
+                    <!-- Botão de Checklist -->
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="checklist">Checklist</button>
+                    </form>
                 </li>
-                
-            {% endfor %}
-
+                {% endfor %}
             </ul>
-            
 
             <!-- Formulário para adicionar nova tarefa em Pré-requisitos -->
             <form method="POST" action="{{ url_for('auth.gerenciar_projeto', project_id=project.id) }}">
@@ -67,32 +68,32 @@ TaskMaster - Gerenciamento de Tarefas
                 <!-- Campo para Comentário -->
                 <label for="comment" class="form-label">Comentário:</label>
                 <textarea name="comment" id="comment" class="form-control" placeholder="Adicione um comentário..." required></textarea>
-
             
                 <button type="submit">Adicionar</button>
             </form>
-            
         </div>
 
         <!-- Coluna Em Produção -->
         <div class="kanban-column">
             <h3>Em Produção</h3>
             <ul id="inProduction" class="kanban-list" ondrop="drop(event, 'Em Produção')" ondragover="allowDrop(event)">
-                <!-- Renderizar tarefas em produção -->
                 {% for tarefa in in_prod_tasks %}
-                    <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                        {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
-                        {% if tarefa.completion_date %}
-                            <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
-                        {% endif %}
-                        {% if tarefa.comment %}
-                            <span class="comment">Comentário: {{ tarefa.comment }}</span>
-                        {% endif %}
-                        <!-- Botão para deletar -->
-                        <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
-                            <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
-                        </form>
-                    </li>
+                <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
+                    {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                    {% if tarefa.completion_date %}
+                        <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                    {% endif %}
+                    {% if tarefa.comment %}
+                        <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                    </form>
+                    <!-- Botão de Checklist -->
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="checklist">Checklist</button>
+                    </form>
+                </li>
                 {% endfor %}
             </ul>
         </div>
@@ -101,21 +102,23 @@ TaskMaster - Gerenciamento de Tarefas
         <div class="kanban-column">
             <h3>Concluído</h3>
             <ul id="completed" class="kanban-list" ondrop="drop(event, 'Concluído')" ondragover="allowDrop(event)">
-                <!-- Renderizar tarefas concluídas -->
                 {% for tarefa in completed_tasks %}
-                    <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                        {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
-                        {% if tarefa.completion_date %}
-                            <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
-                        {% endif %}
-                        {% if tarefa.comment %}
-                            <span class="comment">Comentário: {{ tarefa.comment }}</span>
-                        {% endif %}
-                        <!-- Botão para deletar -->
-                        <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
-                            <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
-                        </form>
-                    </li>
+                <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
+                    {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                    {% if tarefa.completion_date %}
+                        <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                    {% endif %}
+                    {% if tarefa.comment %}
+                        <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                    </form>
+                    <!-- Botão de Checklist -->
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="checklist">Checklist</button>
+                    </form>
+                </li>
                 {% endfor %}
             </ul>
         </div>
