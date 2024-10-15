@@ -8,23 +8,47 @@ TaskMaster - Checklist
     <h2>Checklist da Tarefa: {{ tarefa.description }}</h2>
     <h3>Projeto: {{ projeto.nome_projeto }}</h3>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <div class="checklist-container">
         <form method="POST" action="{{ url_for('auth.atualizar_checklist', task_id=tarefa.id_task, project_id=projeto.id) }}">
             <ul class="checklist-items">
-                <!-- Exemplo de itens do checklist (você pode carregar isso do banco de dados ou adicionar dinamicamente) -->
-                {% for item in checklist_items %}
+                {% for item in tarefa.checklist_items %}
                 <li>
-                    <input type="checkbox" name="item_{{ item.id }}" value="1" {% if item.completed %}checked{% endif %}>
-                    {{ item.description }}
+                    <input type="checkbox" id="item_{{ item.id }}" name="checklist_items" value="{{ item.id }}" {% if item.completed %}checked{% endif %}>
+                    <label for="item_{{ item.id }}">{{ item.description }}</label>
                 </li>
                 {% endfor %}
             </ul>
-            <button type="submit">Salvar Checklist</button>
+            <div class="button-group">
+                <button type="submit">Salvar Checklist</button>
+                <button type="button" id="marcar-todas">Marcar Todas</button>
+                <button type="button" id="desmarcar-todas">Desmarcar Todas</button>
+            </div>            
         </form>
+        
+        <!-- Formulário para adicionar novo item -->
+        <form method="POST" action="{{ url_for('auth.adicionar_item_checklist', task_id=tarefa.id_task) }}">
+            <input type="hidden" name="project_id" value="{{ projeto.id }}">  <!-- Campo oculto para o project_id -->
+            <input type="text" name="descricao_item" placeholder="Descrição do novo item" required class="descricao-item-input">
+            <div class="button-group">
+                <button type="submit">Adicionar Item</button>
+                <a href="{{ url_for('auth.gerenciar_projeto', project_id=projeto.id) }}" class="button-link">Voltar ao Projeto</a>
+            </div>
+            
+        </form>
+        
     </div>
 
-    <!-- Botão para retornar ao projeto -->
-    <a href="{{ url_for('auth.gerenciar_projeto', project_id=projeto.id) }}" class="button-link">Voltar ao Projeto</a>
+    
 
 {% endblock %}
 

@@ -43,3 +43,12 @@ class Task(db.Model):
 
     # Nova coluna para o comentário
     comment = db.Column(db.String(500), nullable=True)  # Comentário opcional
+
+# Modelo de ChecklistItem
+class ChecklistItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    task_id = db.Column(db.Integer, db.ForeignKey('task.id_task'), nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
+
+    task = db.relationship('Task', backref='checklist_items')

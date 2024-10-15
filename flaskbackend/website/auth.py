@@ -3,9 +3,10 @@ from flask_login import login_required
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
-from .models import Usuario, Task, Project, RelUsuarioProject
+from .models import Usuario, Task, Project, RelUsuarioProject, ChecklistItem
 from flask import jsonify, request
 from datetime import datetime
+
 
 
 
@@ -414,30 +415,54 @@ def editar_tarefa(project_id):
 
 
 
-
-
-#CHECKLIST
-@auth.route('/checklist/<int:task_id>/<int:project_id>', methods=['GET'])
-@login_required
-def checklist(task_id, project_id):
-    # Aqui você pode carregar os dados da tarefa e do projeto conforme necessário
-    tarefa = Task.query.get_or_404(task_id)
-    projeto = Project.query.get_or_404(project_id)
-
-    return render_template('checklist.html', tarefa=tarefa, projeto=projeto)
-
-
+# CHECKLIST
 @auth.route('/atualizar_checklist/<int:task_id>/<int:project_id>', methods=['POST'])
 @login_required
 def atualizar_checklist(task_id, project_id):
-    tarefa = Task.query.get_or_404(task_id)
     checklist_items = request.form.getlist('checklist_items')
 
     # Atualize o status dos itens do checklist com base na entrada do formulário
-    for item in checklist_items:
-        checklist_item = ChecklistItem.query.get(item['id'])
-        checklist_item.completed = item['completed'] == '1'  # Marcado como concluído
-        db.session.commit()
+    for item_id in checklist_items:
+        # item_id já é o ID do item, então não precisa do split
+        checklist_item = ChecklistItem.query.get(item_id)
+        if checklist_item:  # Verifique se o checklist_item existe
+            checklist_item.completed = True  # Marcado como concluído
+            db.session.commit()
+        else:
+            flash(f'Item inválido: {item_id}', 'error')  # Log ou trate o erro de maneira apropriada
 
     flash('Checklist atualizado com sucesso!', 'success')
     return redirect(url_for('auth.checklist', task_id=task_id, project_id=project_id))
+
+
+# Rota para exibir o checklist
+@auth.route('/checklist/<int:task_id>/<int:project_id>', methods=['GET'])
+@login_required
+def checklist(task_id, project_id):
+    tarefa = Task.query.get_or_404(task_id)
+    projeto = Project.query.get_or_404(project_id)
+
+    # Renderize o template de checklist, passando a tarefa e o projeto
+    return render_template('checklist.html', tarefa=tarefa, projeto=projeto)
+
+# Rota para adicionar um item ao checklist
+@auth.route('/adicionar_item_checklist/<int:task_id>', methods=['POST'])
+@login_required
+def adicionar_item_checklist(task_id):
+    descricao_item = request.form.get('descricao_item')
+    
+    if descricao_item:
+        novo_item = ChecklistItem(task_id=task_id, description=descricao_item)
+        db.session.add(novo_item)
+        db.session.commit()
+        flash('Item adicionado ao checklist com sucesso!', 'success')
+    else:
+        flash('A descrição do item não pode ser vazia.', 'error')
+
+    # Verifique se o project_id está sendo passado corretamente
+    project_id = request.form.get('project_id')
+    return redirect(url_for('auth.checklist', task_id=task_id, project_id=project_id))
+
+
+
+
