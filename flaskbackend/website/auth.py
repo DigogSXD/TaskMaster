@@ -405,93 +405,63 @@ def editar_tarefa(project_id):
 
     return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
 
-
-
-
-
-
-
-
-
-
-
 # CHECKLIST
+@auth.route('/checklist/<int:task_id>', methods=['GET'])
+@login_required
+def checklist(task_id):
+    tarefa = Task.query.get_or_404(task_id)
+    projeto = Project.query.get_or_404(tarefa.project_id)
+    return render_template('checklist.html', tarefa=tarefa, projeto=projeto)
+
+
 @auth.route('/atualizar_checklist/<int:task_id>/<int:project_id>', methods=['POST'])
 @login_required
 def atualizar_checklist(task_id, project_id):
-    checklist_items = request.form.getlist('checklist_items')
-
-    # Atualize o status dos itens do checklist com base na entrada do formulário
-    for item_id in checklist_items:
-        # item_id já é o ID do item, então não precisa do split
-        checklist_item = ChecklistItem.query.get(item_id)
-        if checklist_item:  # Verifique se o checklist_item existe
-            checklist_item.completed = True  # Marcado como concluído
-            db.session.commit()
-        else:
-            flash(f'Item inválido: {item_id}', 'error')  # Log ou trate o erro de maneira apropriada
-
-    flash('Checklist atualizado com sucesso!', 'success')
-    return redirect(url_for('auth.checklist', task_id=task_id, project_id=project_id))
-
-
-# Rota para exibir o checklist
-@auth.route('/checklist/<int:task_id>/<int:project_id>', methods=['GET'])
-@login_required
-def checklist(task_id, project_id):
     tarefa = Task.query.get_or_404(task_id)
-    projeto = Project.query.get_or_404(project_id)
+    checklist_items_ids = request.form.getlist('checklist_items')
+    print(checklist_items_ids)
 
-    # Renderize o template de checklist, passando a tarefa e o projeto
-    return render_template('checklist.html', tarefa=tarefa, projeto=projeto)
+    for item in tarefa.checklist_items:
+        item.completed = str(item.id) in checklist_items_ids
 
-# Rota para adicionar um item ao checklist
+    db.session.commit()
+    flash('Checklist atualizado com sucesso!', 'success')
+    return redirect(url_for('auth.checklist', task_id=task_id))
+
+
 @auth.route('/adicionar_item_checklist/<int:task_id>', methods=['POST'])
 @login_required
 def adicionar_item_checklist(task_id):
     descricao_item = request.form.get('descricao_item')
-    
     if descricao_item:
         novo_item = ChecklistItem(task_id=task_id, description=descricao_item)
         db.session.add(novo_item)
         db.session.commit()
-        flash('Item adicionado ao checklist com sucesso!', 'success')
+        flash('Item adicionado com sucesso!', 'success')
     else:
-        flash('A descrição do item não pode ser vazia.', 'error')
+        flash('A descrição do item é obrigatória.', 'error')
+    return redirect(url_for('auth.checklist', task_id=task_id))
 
-    # Verifique se o project_id está sendo passado corretamente
-    project_id = request.form.get('project_id')
-    return redirect(url_for('auth.checklist', task_id=task_id, project_id=project_id))
 
-# Rota para alterar o nome da checklist
-@auth.route('/alterar_nome_checklist/<int:task_id>', methods=['POST'])
+@auth.route('/excluir_checklist/<int:item_id>/<int:task_id>', methods=['POST'])
 @login_required
-def alterar_nome_checklist(task_id):
-    novo_nome = request.form.get('novo_nome_checklist')
-    if not novo_nome:
-        flash('O novo nome da checklist não pode ser vazio.')
-        return redirect(url_for('auth.ver_checklist', task_id=task_id))
-
-    # Atualiza o nome da tarefa no banco de dados
-    task = Task.query.get_or_404(task_id)
-    task.description = novo_nome
+def excluir_checklist(item_id, task_id):
+    item = ChecklistItem.query.get_or_404(item_id)
+    db.session.delete(item)
     db.session.commit()
+    flash('Item excluído com sucesso!', 'success')
+    return redirect(url_for('auth.checklist', task_id=task_id))
 
-    flash('Nome da checklist alterado com sucesso!')
-    return redirect(url_for('auth.ver_checklist', task_id=task_id))
 
-# Rota para excluir a checklist
-@auth.route('/excluir_checklist/<int:task_id>/<int:project_id>', methods=['POST'])
+@auth.route('/alterar_item_checklist/<int:item_id>/<int:task_id>', methods=['POST'])
 @login_required
-def excluir_checklist(task_id, project_id):
-    # Encontra a tarefa no banco de dados e exclui
-    task = Task.query.get_or_404(task_id)
-
-    # Também exclui todos os itens da checklist associados à tarefa
-    ChecklistItem.query.filter_by(task_id=task_id).delete()
-    
-    db.session.delete(task)
-    db.session.commit()
-
-    flash('Checklist excluída com sucesso!')
-    return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))
+def alterar_item_checklist(item_id, task_id):
+    novo_nome_item = request.form.get('novo_nome_item')
+    if novo_nome_item:
+        item = ChecklistItem.query.get_or_404(item_id)
+        item.description = novo_nome_item
+        db.session.commit()
+        flash('Nome do item alterado com sucesso!', 'success')
+    else:
+        flash('O novo nome do item é obrigatório.', 'error')
+    return redirect(url_for('auth.checklist', task_id=task_id))
