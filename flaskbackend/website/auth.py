@@ -463,6 +463,35 @@ def adicionar_item_checklist(task_id):
     project_id = request.form.get('project_id')
     return redirect(url_for('auth.checklist', task_id=task_id, project_id=project_id))
 
+# Rota para alterar o nome da checklist
+@auth.route('/alterar_nome_checklist/<int:task_id>', methods=['POST'])
+@login_required
+def alterar_nome_checklist(task_id):
+    novo_nome = request.form.get('novo_nome_checklist')
+    if not novo_nome:
+        flash('O novo nome da checklist não pode ser vazio.')
+        return redirect(url_for('auth.ver_checklist', task_id=task_id))
 
+    # Atualiza o nome da tarefa no banco de dados
+    task = Task.query.get_or_404(task_id)
+    task.description = novo_nome
+    db.session.commit()
 
+    flash('Nome da checklist alterado com sucesso!')
+    return redirect(url_for('auth.ver_checklist', task_id=task_id))
 
+# Rota para excluir a checklist
+@auth.route('/excluir_checklist/<int:task_id>/<int:project_id>', methods=['POST'])
+@login_required
+def excluir_checklist(task_id, project_id):
+    # Encontra a tarefa no banco de dados e exclui
+    task = Task.query.get_or_404(task_id)
+
+    # Também exclui todos os itens da checklist associados à tarefa
+    ChecklistItem.query.filter_by(task_id=task_id).delete()
+    
+    db.session.delete(task)
+    db.session.commit()
+
+    flash('Checklist excluída com sucesso!')
+    return redirect(url_for('auth.gerenciar_projeto', project_id=project_id))

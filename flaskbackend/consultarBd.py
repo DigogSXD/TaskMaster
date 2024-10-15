@@ -19,7 +19,7 @@ try:
         else:
             print(f"A tabela {tabela} está vazia.")
 
-    tabelas = ['usuario', 'project', 'task']
+    tabelas = ['usuario', 'project', 'task','checklist_item']
     for tabela in tabelas:
         consultar_tabela(tabela)
     conn.close()

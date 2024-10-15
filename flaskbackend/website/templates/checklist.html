@@ -43,12 +43,23 @@ TaskMaster - Checklist
                 <button type="submit">Adicionar Item</button>
                 <a href="{{ url_for('auth.gerenciar_projeto', project_id=projeto.id) }}" class="button-link">Voltar ao Projeto</a>
             </div>
-            
         </form>
-        
     </div>
 
-    
+    <!-- Botões para alterar o nome e excluir checklist -->
+    <div class="checklist-actions">
+        <!-- Formulário para alterar nome da checklist -->
+        <form method="POST" action="{{ url_for('auth.alterar_nome_checklist', task_id=tarefa.id_task) }}" class="alterar-nome-form">
+            <input type="hidden" name="project_id" value="{{ projeto.id }}">
+            <input type="text" name="novo_nome_checklist" placeholder="Novo nome da checklist" required>
+            <button type="submit">Alterar Nome</button>
+        </form>
+
+        <!-- Formulário para excluir a checklist -->
+        <form method="POST" action="{{ url_for('auth.excluir_checklist', task_id=tarefa.id_task, project_id=projeto.id) }}" class="excluir-checklist-form">
+            <button type="submit" class="btn-excluir">Excluir Checklist</button>
+        </form>
+    </div>
 
 {% endblock %}
 
