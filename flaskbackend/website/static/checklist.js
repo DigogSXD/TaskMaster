@@ -11,3 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 });
+
+function toggleEdit(itemId) {
+    const editForm = document.getElementById(`edit-form-${itemId}`);
+    if (editForm.style.display === 'none' || editForm.style.display === '') {
+        editForm.style.display = 'block'; // Mostra o formulário de edição
+    } else {
+        editForm.style.display = 'none'; // Oculta o formulário de edição
+    }
+}

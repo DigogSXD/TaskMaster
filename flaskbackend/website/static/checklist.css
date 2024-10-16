@@ -2,163 +2,180 @@
 .checklist-items {
     list-style: none;
     padding: 0;
-    margin: 0; /* Remover margens padrão */
+    margin: 0;
 }
 
 .checklist-items li {
     display: flex;
     align-items: center;
-    padding: 10px; /* Reduzir o padding */
+    padding: 10px;
     border-bottom: 1px solid #ddd;
-    background-color: #f9f9f9; /* Fundo mais claro */
-    transition: background-color 0.3s ease; /* Transição suave */
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
 }
 
 .checklist-items li:hover {
-    background-color: #f1f1f1; /* Destaque ao passar o mouse */
+    background-color: #f1f1f1;
 }
 
 .checklist-items li:last-child {
     border-bottom: none;
 }
 
+
 /* Estilo dos checkboxes */
 .checklist-items input[type="checkbox"] {
-    margin-right: 10px; /* Ajuste do espaço ao lado do checkbox */
-    transform: scale(1.5); /* Deixa o checkbox maior */
-    cursor: pointer; /* Cursor pointer para checkboxes */
+    margin-right: 10px;
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
-/* Estilo para os itens de checklist */
+
+/* Estilo dos rótulos */
 .checklist-items li label {
-    font-size: 16px; /* Tamanho de fonte ajustado */
-    color: #333; /* Cor do texto mais escura */
+    font-size: 16px;
+    color: #333;
 }
 
-/* Estilo para os botões */
-button[type="submit"],
-button[type="button"] {
+
+/* Estilo para botões */
+button {
     display: block;
-    width: auto; /* Ajusta a largura do botão */
-    padding: 8px 15px; /* Reduz o padding */
-    background-color: #28a745; /* Verde */
+    padding: 8px 15px;
+    background-color: #28a745;
     color: white;
-    font-size: 14px; /* Tamanho da fonte reduzido */
-    font-weight: bold;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px; /* Reduzir a margem superior */
-    transition: background-color 0.3s ease; /* Transição suave */
+    transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: #218838; /* Tom de verde mais escuro ao passar o mouse */
+button:hover {
+    background-color: #218838;
 }
+
 
 /* Estilo do link como um botão */
 a.button-link {
-    display: inline-block;
-    padding: 8px 15px; /* Reduzir o padding */
-    background-color: #007bff; /* Azul */
+    padding: 8px 15px;
+    background-color: #007bff;
     color: white;
-    text-align: center;
     text-decoration: none;
-    font-weight: bold;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Ajuste da margem superior */
 }
 
 a.button-link:hover {
-    background-color: #0056b3; /* Tom de azul mais escuro ao passar o mouse */
-}
-
-/* Estilo das mensagens de flash */
-.flashes {
-    list-style: none;
-    padding: 10px;
-    background-color: #37994c; /* Cor de fundo */
-    color: #ffffff; /* Cor do texto */
-    border: 1px solid #00ff2a; /* Borda */
-    border-radius: 5px; /* Cantos arredondados */
-    margin-top: 20px;
-    animation: fadeIn 0.5s; /* Animação de entrada */
-}
-
-/* Animação de fadeIn para mensagens de flash */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    background-color: #0056b3;
 }
 
 
-
-/*BOTOES*/
-
-.button-group {
-    display: flex; /* Usar flexbox para alinhar os botões horizontalmente */
-    justify-content: space-between; /* Espaçar os botões uniformemente */
-    margin-top: 20px; /* Espaçamento superior */
-}
-
-.button-group button {
-    flex: 1; /* Fazer com que os botões ocupem o mesmo espaço */
-    margin-right: 10px; /* Espaço entre os botões */
-}
-
-/* Remover o margin-right do último botão */
-.button-group button:last-child {
-    margin-right: 0; /* Remove o espaço do último botão */
-}
-
-/*INPUT*/
+/* Estilo para o campo de entrada */
 .descricao-item-input {
-    width: 90%; /* Ocupa toda a largura disponível */
-    padding: 10px; /* Espaçamento interno */
-    font-size: 16px; /* Tamanho da fonte */
-    border: 2px solid #ccc; /* Borda padrão */
-    border-radius: 5px; /* Cantos arredondados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: border-color 0.3s ease; /* Transição suave para a borda */
-    margin-bottom: 10px; /* Espaço inferior */
-    margin-top: 20px; /* Adiciona espaço acima do campo */
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
+
 
 /* Estilo para o placeholder */
 .descricao-item-input::placeholder {
-    color: #999; /* Cor do texto do placeholder */
-    opacity: 1; /* Para garantir que a opacidade não mude */
+    color: #999;
 }
 
-/* Estilo quando o campo é focado */
+
+/* Foco no campo de entrada */
 .descricao-item-input:focus {
-    border-color: #007bff; /* Borda azul ao focar */
-    outline: none; /* Remove a borda padrão do navegador */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 
-/*Botoes do lado*/
-
+/* Agrupamento de botões */
 .button-group {
-    display: flex; /* Usar flexbox para alinhar os botões horizontalmente */
-    justify-content: space-between; /* Espaçar os botões uniformemente */
-    margin-top: 20px; /* Espaço superior */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .button-group button,
 .button-group .button-link {
-    flex: 1; /* Fazer com que os botões ocupem o mesmo espaço */
-    padding: 8px 10px; /* Reduzir o padding para diminuir o tamanho */
-    font-size: 14px; /* Reduzir o tamanho da fonte */
-    margin-right: 10px; /* Espaço entre os botões */
-    text-align: center; /* Centraliza o texto */
+    flex: 1;
+    margin-right: 10px;
 }
 
-/* Remover o margin-right do último botão */
 .button-group button:last-child,
 .button-group .button-link:last-child {
-    margin-right: 0; /* Remove o espaço do último botão */
+    margin-right: 0;
+}
+
+/* Estilo para a tabela de botões */
+.button-table {
+    display: flex; /* Usar flexbox para alinhar os botões lado a lado */
+    margin-top: 10px; /* Espaçamento superior */
+}
+
+.button-cell {
+    margin-right: 10px; /* Espaçamento à direita entre os botões */
+}
+
+/* Estilo do botão de editar */
+.btn-editar-item {
+    background-color: #007bff; /* Azul */
+    color: white; /* Texto branco */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de ponteiro */
+    padding: 5px 10px; /* Tamanho do botão */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.btn-editar-item:hover {
+    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+/* Estilo do botão de excluir */
+.btn-excluir-item {
+    background-color: #dc3545; /* Vermelho */
+    color: white; /* Texto branco */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de ponteiro */
+    padding: 5px 10px; /* Tamanho do botão */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.btn-excluir-item:hover {
+    background-color: #c82333; /* Vermelho mais escuro ao passar o mouse */
+}
+
+
+/* Estilo dos botões */
+.btn {
+    padding: 8px 15px; /* Tamanho do botão */
+    color: white; /* Texto branco */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Azul */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Vermelho */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Vermelho mais escuro ao passar o mouse */
 }
