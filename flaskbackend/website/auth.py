@@ -147,6 +147,7 @@ def gerenciar_projeto(project_id):
         task_name = request.form.get('task_name')
         task_status = request.form.get('task_status')
         comment = request.form.get('comment')
+        drive_link = request.form.get('drive_link')  # Capturar o link do Google Drive
 
         # Validação de importância e facilidade
         try:
@@ -175,7 +176,8 @@ def gerenciar_projeto(project_id):
             # Criar nova tarefa
             nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id,
                                importance=importance, ease=ease, priority=priority,
-                               completion_date=completion_date, comment=comment)
+                               completion_date=completion_date, comment=comment,
+                               drive_link=drive_link)  # Armazenar o link do Google Drive
             db.session.add(nova_tarefa)
             db.session.commit()
             flash('Tarefa adicionada com sucesso!', 'success')
@@ -192,6 +194,7 @@ def gerenciar_projeto(project_id):
     return render_template('project_details.html', project=projeto,
                            prereq_tasks=prereq_tasks, in_prod_tasks=in_prod_tasks, 
                            completed_tasks=completed_tasks)
+
     
 
 

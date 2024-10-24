@@ -317,3 +317,39 @@ button:hover {
 #checklist:hover {
     background-color: #31b0d5; /* Tom mais escuro de azul */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para o contêiner do link do Google Drive */
+.drive-link {
+    display: block; /* Para garantir que o link apareça em uma nova linha */
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Estilo para o próprio link */
+.drive-link a {
+    color: #1a73e8; /* Cor azul para o link (padrão Google Drive) */
+    text-decoration: none; /* Remove o sublinhado */
+    font-weight: bold; /* Torna o link em negrito */
+}
+
+/* Estilo quando o link é clicado ou focado */
+.drive-link a:hover, 
+.drive-link a:focus {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    color: #0c47a1; /* Cor mais escura ao passar o mouse */
+}

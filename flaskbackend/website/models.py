@@ -41,10 +41,10 @@ class Task(db.Model):
     priority = db.Column(db.Integer, nullable=False)
     completion_date = db.Column(db.Date, nullable=True)
 
-    # Nova coluna para o comentário
     comment = db.Column(db.String(500), nullable=True)  # Comentário opcional
+    
+    drive_link = db.Column(db.String(500), nullable=True)  # Link
 
-    # Relacionamento com ChecklistItem
     checklist_items = db.relationship('ChecklistItem', backref='task', cascade='all, delete-orphan')
 
 

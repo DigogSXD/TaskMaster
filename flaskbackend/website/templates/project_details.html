@@ -15,13 +15,20 @@ TaskMaster - Gerenciamento de Tarefas
                 <!-- Renderizar tarefas pré-requisitos -->
                 {% for tarefa in prereq_tasks %}
                 <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                    {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                    {{ tarefa.description }}
                     {% if tarefa.completion_date %}
                         <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
                     {% endif %}
+
                     {% if tarefa.comment %}
                         <span class="comment">Comentário: {{ tarefa.comment }}</span>
                     {% endif %}
+
+                    <!-- Exibir o link se disponível -->
+                    {% if tarefa.drive_link %}
+                    <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
+                    {% endif %}
+                    
                     <!-- Botão para deletar -->
                     <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
@@ -69,6 +76,11 @@ TaskMaster - Gerenciamento de Tarefas
                 <label for="comment" class="form-label">Comentário:</label>
                 <textarea name="comment" id="comment" class="form-control" placeholder="Adicione um comentário..." required></textarea>
             
+
+                <!-- Novo campo para link do Google Drive -->
+                <label for="drive_link" class="form-label">Link do arquivo</label>
+                <input type="url" name="drive_link" id="drive_link" class="form-control" placeholder="Insira o link">
+
                 <button type="submit">Adicionar</button>
             </form>
         </div>
@@ -79,12 +91,17 @@ TaskMaster - Gerenciamento de Tarefas
             <ul id="inProduction" class="kanban-list" ondrop="drop(event, 'Em Produção')" ondragover="allowDrop(event)">
                 {% for tarefa in in_prod_tasks %}
                 <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                    {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                    {{ tarefa.description }}
                     {% if tarefa.completion_date %}
                         <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
                     {% endif %}
                     {% if tarefa.comment %}
                         <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+
+                    <!-- Exibir o link se disponível -->
+                    {% if tarefa.drive_link %}
+                    <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
                     {% endif %}
                     <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
@@ -104,12 +121,17 @@ TaskMaster - Gerenciamento de Tarefas
             <ul id="completed" class="kanban-list" ondrop="drop(event, 'Concluído')" ondragover="allowDrop(event)">
                 {% for tarefa in completed_tasks %}
                 <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
-                    {{ tarefa.description }} - Prioridade: {{ tarefa.priority }} (Importância: {{ tarefa.importance }}, Facilidade: {{ tarefa.ease }})
+                    {{ tarefa.description }}
                     {% if tarefa.completion_date %}
                         <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
                     {% endif %}
                     {% if tarefa.comment %}
                         <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+
+                    <!-- Exibir o link se disponível -->
+                    {% if tarefa.drive_link %}
+                    <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
                     {% endif %}
                     <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
