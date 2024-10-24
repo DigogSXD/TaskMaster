@@ -221,12 +221,25 @@ def editar_projeto(project_id):
 def deletar_projeto(project_id):
     projeto = Project.query.get_or_404(project_id)
     
-    # Remover o projeto
-    db.session.delete(projeto)
-    db.session.commit()
+    # Buscar todas as tarefas associadas ao projeto
+    tarefas = Task.query.filter_by(project_id=project_id).all()
+    
+    try:
+        # Deletar todas as tarefas associadas ao projeto
+        for tarefa in tarefas:
+            db.session.delete(tarefa)
+        
+        # Remover o projeto
+        db.session.delete(projeto)
+        db.session.commit()
+        
+        flash('Projeto e todas as tarefas associadas deletados com sucesso!', category='success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Erro ao deletar o projeto e as tarefas associadas.', 'error')
 
-    flash('Projeto deletado com sucesso!', category='success')
     return redirect(url_for('auth.home'))
+
 
 
 @auth.route('/adicionar_projeto', methods=['POST'])
