@@ -481,3 +481,13 @@ def alterar_item_checklist(item_id, task_id):
     else:
         flash('O novo nome do item é obrigatório.', 'error')
     return redirect(url_for('auth.checklist', task_id=task_id))
+
+
+
+
+
+#NOTIFICAÇÕES
+@auth.route('/notifications')
+def notifications():
+    # Lógica para a página de notificações
+    return render_template('notifications.html')

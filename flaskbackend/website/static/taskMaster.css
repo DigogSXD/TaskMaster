@@ -217,3 +217,20 @@ header ul li a {
 }
 
 
+.notification-icon {
+    position: relative;
+    font-size: 24px;
+    color: #333; /* Cor do ícone */
+    text-decoration: none;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
