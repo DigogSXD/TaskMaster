@@ -3,13 +3,9 @@ from flask_login import login_required
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
-from .models import Usuario, Task, Project, RelUsuarioProject, ChecklistItem
+from .models import Usuario, Task, Project, RelUsuarioProject, ChecklistItem,Notification
 from flask import jsonify, request
 from datetime import datetime
-
-
-
-
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
@@ -234,6 +230,10 @@ def deletar_projeto(project_id):
         
         # Remover o projeto
         db.session.delete(projeto)
+        # Adicionar notificação
+        nova_notificacao = Notification(user_id=current_user.id, content=f'O projeto "{projeto.nome_projeto}" foi deletado.')
+        db.session.add(nova_notificacao)
+        db.session.commit()
         db.session.commit()
         
         flash('Projeto e todas as tarefas associadas deletados com sucesso!', category='success')
@@ -265,6 +265,11 @@ def adicionar_projeto():
     db.session.add(novo_projeto)
     try:
         db.session.commit()
+        # Adicionar notificação
+        nova_notificacao = Notification(user_id=current_user.id, content=f'Projeto "{nome_projeto}" foi criado.', project_id=novo_projeto.id)
+        db.session.add(nova_notificacao)
+        db.session.commit()
+        flash('Projeto criado com sucesso!', category='success')
         flash('Projeto criado com sucesso!', category='success')
     except Exception as e:
         db.session.rollback()
@@ -336,6 +341,15 @@ def atualizar_tarefas():
             tarefa.status = new_status
             db.session.commit()
 
+            # Adicionar notificação para atualização de status da tarefa
+            nova_notificacao = Notification(
+                user_id=current_user.id,
+                content=f'O status da tarefa "{tarefa.description}" foi atualizado para "{new_status}".',
+                task_id=tarefa.id
+            )
+            db.session.add(nova_notificacao)
+            db.session.commit()
+
     return jsonify({'success': True}), 200
 
 # COMPARTILHAR
@@ -383,6 +397,15 @@ def deletar_tarefa(task_id, project_id):
         db.session.delete(tarefa)
         db.session.commit()
         flash('Tarefa deletada com sucesso!', 'success')
+        # Adicionar notificação para exclusão da tarefa
+        nova_notificacao = Notification(
+            user_id=current_user.id,
+            content=f'A tarefa "{tarefa.description}" foi deletada.',
+            project_id=project_id,
+            task_id=tarefa.id
+        )
+        db.session.add(nova_notificacao)
+        db.session.commit()
     except Exception as e:
         db.session.rollback()
         flash('Erro ao deletar a tarefa.', 'error')
@@ -415,6 +438,16 @@ def editar_tarefa(project_id):
     try:
         db.session.commit()
         flash('Tarefa atualizada com sucesso!', 'success')
+
+         # Adicionar notificação para edição da tarefa
+        nova_notificacao = Notification(
+            user_id=current_user.id,
+            content=f'A tarefa "{task_name}" foi atualizada.',
+            project_id=project_id,
+            task_id=task_id
+        )
+        db.session.add(nova_notificacao)
+        db.session.commit()
     except Exception as e:
         db.session.rollback()
         flash('Erro ao atualizar a tarefa.', 'error')
@@ -487,7 +520,8 @@ def alterar_item_checklist(item_id, task_id):
 
 
 #NOTIFICAÇÕES
-@auth.route('/notifications')
-def notifications():
-    # Lógica para a página de notificações
-    return render_template('notifications.html')
+@auth.route('/notificacoes')
+@login_required
+def notificacoes():
+    notificacoes = Notification.query.filter_by(user_id=current_user.id).order_by(Notification.created_at.desc()).all()
+    return render_template('notificacoes.html', notificacoes=notificacoes)

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações</title>
+    <style>
+        /* Tu vai ter que carregar aqui */
+    </style>
+</head>
+<body>
+
+<div class="notification-container">
+    <h2>Notificações</h2>
+    
+    {% for notificacao in notificacoes %}
+        <div class="update">
+            <p>{{ notificacao.content }}</p>
+            <p class="date">Data: {{ notificacao.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
+        </div>
+    {% else %}
+        <p>Sem notificações no momento.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>
