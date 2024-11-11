@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Cabeçalho do documento (não exibido na página) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='taskMaster.css')}}">
+</head>
+
+<body>
+    <!-- Cabeçalho visual exibido na página -->
+    <header>
+        <div class="containerTask">
+            <h1>TaskMaster</h1>
+            <ul>
+                <li><a href="{{ url_for('auth.home') }}">Home</a></li>
+                <li><a href="{{ url_for('auth.sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                <li>
+                    <!-- NOTIFICAÇÃO para ficar mais facil -->
+                    <a href="{{ url_for('auth.notifications') }}" class="notification-icon">
+                        🔔
+                        <span class="notification-badge">3</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container main">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{url_for('static', filename='taskMaster.js')}}"></script>
+</body>
+</html>
