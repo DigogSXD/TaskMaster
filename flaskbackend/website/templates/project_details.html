@@ -34,7 +34,7 @@ TaskMaster - Gerenciamento de Tarefas
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                     <!-- Botão de Checklist -->
-                    <form method="GET" action="{{ url_for('checklist.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="GET" action="{{ url_for('checklist_bp.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="checklist">Checklist</button>
                     </form>
                 </li>
@@ -107,7 +107,7 @@ TaskMaster - Gerenciamento de Tarefas
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                     <!-- Botão de Checklist -->
-                    <form method="GET" action="{{ url_for('checklist.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="GET" action="{{ url_for('checklist_bp.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="checklist">Checklist</button>
                     </form>
                 </li>
@@ -137,7 +137,7 @@ TaskMaster - Gerenciamento de Tarefas
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                     <!-- Botão de Checklist -->
-                    <form method="GET" action="{{ url_for('checklist.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="GET" action="{{ url_for('checklist_bp.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="checklist">Checklist</button>
                     </form>
                 </li>

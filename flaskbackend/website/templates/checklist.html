@@ -9,7 +9,7 @@ TaskMaster - Checklist
     <h3>Projeto: {{ projeto.nome_projeto }}</h3>
 
     <div class="checklist-container">
-        <form method="POST" action="{{ url_for('auth.atualizar_checklist', task_id=tarefa.id_task, project_id=projeto.id) }}">
+        <form method="POST" action="{{ url_for('checklist_bp.atualizar_checklist', task_id=tarefa.id_task, project_id=projeto.id) }}">
             <ul class="checklist-items">
                 {% for item in tarefa.checklist_items %}
                 <li>
@@ -25,7 +25,7 @@ TaskMaster - Checklist
                             </td>
                             <td>
                                 <!-- Formulário para excluir o item -->
-                                <form method="POST" action="{{ url_for('auth.excluir_checklist', item_id=item.id, task_id=tarefa.id_task) }}" style="display:inline;">
+                                <form method="POST" action="{{ url_for('checklist_bp.excluir_checklist', item_id=item.id, task_id=tarefa.id_task) }}" style="display:inline;">
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar este item?');">Excluir</button>
                                 </form>
                             </td>
@@ -33,7 +33,7 @@ TaskMaster - Checklist
                     </table>
 
                     <!-- Campo de edição que ficará oculto inicialmente -->
-                    <form method="POST" action="{{ url_for('auth.alterar_item_checklist', item_id=item.id, task_id=tarefa.id_task) }}" class="inline-form" id="edit-form-{{ item.id }}" style="display:none;">
+                    <form method="POST" action="{{ url_for('checklist_bp.alterar_item_checklist', item_id=item.id, task_id=tarefa.id_task) }}" class="inline-form" id="edit-form-{{ item.id }}" style="display:none;">
                         <input type="text" name="novo_nome_item" placeholder="Novo nome" required>
                         <button type="submit">Alterar Nome</button>
                     </form>
@@ -48,12 +48,12 @@ TaskMaster - Checklist
         </form>
         
         <!-- Formulário para adicionar novo item -->
-        <form method="POST" action="{{ url_for('auth.adicionar_item_checklist', task_id=tarefa.id_task) }}">
+        <form method="POST" action="{{ url_for('checklist_bp.adicionar_item_checklist', task_id=tarefa.id_task) }}">
             <input type="hidden" name="project_id" value="{{ projeto.id }}">  <!-- Campo oculto para o project_id -->
             <input type="text" name="descricao_item" placeholder="Descrição do novo item" required class="descricao-item-input">
             <div class="button-group">
                 <button type="submit">Adicionar Item</button>
-                <a href="{{ url_for('auth.gerenciar_projeto', project_id=projeto.id) }}" class="button-link">Voltar ao Projeto</a>
+                <a href="{{ url_for('project.gerenciar_projeto', project_id=projeto.id) }}" class="button-link">Voltar ao Projeto</a>
             </div>
         </form>
     </div>

@@ -17,12 +17,13 @@ def checklist(task_id):
 @login_required
 def atualizar_checklist(task_id, project_id):
     tarefa = Task.query.get_or_404(task_id)
-    checklist_items_ids = request.form.getlist('checklist_items')
+    checklist_items_ids = request.form.getlist('checklist_items')  # Itens marcados
 
+    # Atualiza o campo completed de acordo com a seleção no formulário
     for item in tarefa.checklist_items:
-        item.completed = str(item.id) in checklist_items_ids
+        item.completed = str(item.id) in checklist_items_ids  # Marca como completo se o id estiver em checklist_items_ids
 
-    db.session.commit()
+    db.session.commit()  # Salva a atualização de completed no banco de dados
     flash('Checklist atualizado com sucesso!', 'success')
     return redirect(url_for('checklist_bp.checklist', task_id=task_id))
 

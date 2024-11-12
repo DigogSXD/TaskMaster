@@ -9,19 +9,18 @@
     </style>
 </head>
 <body>
-
-<div class="notification-container">
-    <h2>Notificações</h2>
-    
-    {% for notificacao in notificacoes %}
-        <div class="update">
-            <p>{{ notificacao.content }}</p>
-            <p class="date">Data: {{ notificacao.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
+    <body>
+        <div class="notification-container">
+            <h2>Notificações</h2>
+            
+            {% for notificacao in notificacoes %}
+                <div class="update">
+                    <p>{{ notificacao.content }}</p>
+                    <p class="date">Data: {{ notificacao.created_at.strftime('%d/%m/%Y %H:%M') }}</p>
+                </div>
+            {% else %}
+                <p>Nenhuma notificação disponível.</p>
+            {% endfor %}
         </div>
-    {% else %}
-        <p>Sem notificações no momento.</p>
-    {% endfor %}
-</div>
-
-</body>
+    </body>
 </html>

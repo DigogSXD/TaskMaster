@@ -33,23 +33,25 @@ def home():
             db.session.add(projeto_novo)
             try:
                 db.session.commit()
+                # Adiciona uma notificação
+                nova_notificacao = Notification(user_id=current_user.id, content=f'Projeto "{nome_projeto}" foi criado.')
+                db.session.add(nova_notificacao)
+                db.session.commit()
+                flash('Projeto criado com sucesso!', category='success')
             except Exception as e:
                 db.session.rollback()
                 flash('Erro ao salvar o projeto.', category='error')
 
         return redirect(url_for('project.home'))
 
-    # Buscar todos os projetos que o usuário criou OU que foram compartilhados com ele
-    projetos_criados = Project.query.filter_by(user_id=current_user.id).all()  # Projetos criados
-    projetos_compartilhados = current_user.projects  # Projetos compartilhados via RelUsuarioProject
-
-    # Combinar as listas
+    # Obter todos os projetos do usuário
+    projetos_criados = Project.query.filter_by(user_id=current_user.id).all()
+    projetos_compartilhados = current_user.projects
     todos_os_projetos = projetos_criados + projetos_compartilhados
 
     return render_template('taskMaster.html', projects=todos_os_projetos)
 
 
-# Projeto e Task
 @project.route('/projeto/<int:project_id>', methods=['GET', 'POST'])
 @login_required
 def gerenciar_projeto(project_id):
@@ -59,9 +61,8 @@ def gerenciar_projeto(project_id):
         task_name = request.form.get('task_name')
         task_status = request.form.get('task_status')
         comment = request.form.get('comment')
-        drive_link = request.form.get('drive_link')  # Capturar o link do Google Drive
+        drive_link = request.form.get('drive_link')
 
-        # Validação de importância e facilidade
         try:
             importance = int(request.form.get('importance'))
             ease = int(request.form.get('ease'))
@@ -69,13 +70,11 @@ def gerenciar_projeto(project_id):
             flash('Valores de importância e facilidade inválidos.', 'error')
             return redirect(url_for('project.gerenciar_projeto', project_id=project_id))
 
-        # Verificar se a data de conclusão foi fornecida
         completion_date = request.form.get('completion_date')
         if not completion_date:
             flash('Data de conclusão é obrigatória.', 'error')
             return redirect(url_for('project.gerenciar_projeto', project_id=project_id))
 
-        # Validação do formato da data de conclusão
         try:
             completion_date = datetime.strptime(completion_date, '%Y-%m-%d').date()
         except ValueError:
@@ -84,13 +83,16 @@ def gerenciar_projeto(project_id):
 
         if task_name and task_status and importance and ease:
             priority = importance * ease
-
-            # Criar nova tarefa
             nova_tarefa = Task(description=task_name, status=task_status, project_id=projeto.id,
                                importance=importance, ease=ease, priority=priority,
                                completion_date=completion_date, comment=comment,
-                               drive_link=drive_link)  # Armazenar o link do Google Drive
+                               drive_link=drive_link)
             db.session.add(nova_tarefa)
+            db.session.commit()
+
+            # Adiciona uma notificação
+            nova_notificacao = Notification(user_id=current_user.id, content=f'Tarefa "{task_name}" adicionada ao projeto "{projeto.nome_projeto}".')
+            db.session.add(nova_notificacao)
             db.session.commit()
             flash('Tarefa adicionada com sucesso!', 'success')
         else:
@@ -98,7 +100,6 @@ def gerenciar_projeto(project_id):
 
         return redirect(url_for('project.gerenciar_projeto', project_id=project_id))
 
-    # Obter tarefas por status
     prereq_tasks = Task.query.filter_by(project_id=projeto.id, status='Pré-requisitos').order_by(Task.priority.desc()).all()
     in_prod_tasks = Task.query.filter_by(project_id=projeto.id, status='Em Produção').order_by(Task.priority.desc()).all()
     completed_tasks = Task.query.filter_by(project_id=projeto.id, status='Concluído').order_by(Task.priority.desc()).all()
@@ -108,10 +109,6 @@ def gerenciar_projeto(project_id):
                            completed_tasks=completed_tasks)
 
     
-
-
-
-
 @project.route('/editar_projeto/<int:project_id>', methods=['GET', 'POST'])
 @login_required
 def editar_projeto(project_id):
@@ -123,8 +120,18 @@ def editar_projeto(project_id):
         if not novo_nome:
             flash('O nome do projeto não pode ser vazio.', category='error')
         else:
+            nome_antigo = projeto.nome_projeto  # Armazenar o nome antigo do projeto
             projeto.nome_projeto = novo_nome
             db.session.commit()
+            
+            # Adicionar notificação informando a atualização do nome do projeto
+            nova_notificacao = Notification(
+                user_id=current_user.id,
+                content=f'O projeto "{nome_antigo}" foi atualizado para "{novo_nome}".'
+            )
+            db.session.add(nova_notificacao)
+            db.session.commit()
+            
             flash('Projeto atualizado com sucesso!', category='success')
             return redirect(url_for('project.home'))
     
@@ -195,7 +202,6 @@ def adicionar_projeto():
     return redirect(url_for('project.home'))
 
 
-# COMPARTILHAR
 @project.route('/compartilhar_projeto/<int:project_id>', methods=['POST'])
 @login_required
 def compartilhar_projeto(project_id):
@@ -211,18 +217,26 @@ def compartilhar_projeto(project_id):
         flash("Usuário inexistente", category="error")
         return redirect(url_for('project.home'))
     
-    # Verificar se o relacionamento já existe
     relacao_existente = RelUsuarioProject.query.filter_by(user_id=usuario.id, project_id=project_id).first()
 
     if relacao_existente:
         flash(f'O usuário {usuario.email} já faz parte deste projeto.', category="info")
-        return redirect(url_for('project.home'))
     else:
-        # Criar novo relacionamento
         nova_relacao = RelUsuarioProject(user_id=usuario.id, project_id=project_id)
         db.session.add(nova_relacao)
         db.session.commit()
+        
+        nova_notificacao = Notification(user_id=usuario.id, content=f'Você foi adicionado ao projeto "{Project.query.get(project_id).nome_projeto}".')
+        db.session.add(nova_notificacao)
+        db.session.commit()
+        
         flash(f'O usuário {usuario.email} foi adicionado ao projeto com sucesso.', category="success")
-        return redirect(url_for('project.home'))
-    
-    return render_template('taskMaster.html')
+
+    return redirect(url_for('project.home'))
+
+
+@project.route('/notificacoes')
+@login_required
+def notificacoes():
+    notificacoes = Notification.query.filter_by(user_id=current_user.id).order_by(Notification.created_at.desc()).all()
+    return render_template('notificacoes.html', notificacoes=notificacoes)
