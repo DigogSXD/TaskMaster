@@ -7,7 +7,7 @@ Editar Projeto - {{ projeto.nome_projeto }}
 {% block content %}
     <h2>Editar Projeto</h2>
     
-    <form id="criarProjeto" method="POST" action="{{ url_for('auth.editar_projeto', project_id=projeto.id) }}">
+    <form id="criarProjeto" method="POST" action="{{ url_for('project.editar_projeto', project_id=projeto.id) }}">
         <input type="text" name="project_name" value="{{ projeto.nome_projeto }}" required>
         <button type="submit">Salvar Alterações</button>
     </form>
