@@ -1,5 +1,3 @@
-# I'll create a CSS file based on the styling provided above.
-css_content = """
 /* Estilo básico para a página */
 body {
     font-family: 'Arial', sans-serif;
@@ -59,11 +57,3 @@ h2 {
         width: 90%;
     }
 }
-"""
-
-# Saving the content to a .css file
-file_path = "/mnt/data/notification_styles.css"
-with open(file_path, "w") as file:
-    file.write(css_content)
-
-file_path
