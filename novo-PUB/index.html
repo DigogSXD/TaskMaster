@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wario Pub</title>
+    <link rel="icon" href="assets/IMG/favicon.jpg" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/CSS/pub.css"> <!-- CSS Principal -->
+   
+</head>
+<body>
+    <!-- Navbar com offcanvas -->
+    <nav class="navbar navbar-light">
+        <div class="container-fluid">
+            <div class="navbar-content d-flex align-items-center">
+                <img src="assets/IMG/latest.webp" alt="Imagem sobreposta" class="imagem-sobreposta img-fluid">
+                <div class="Pub">
+                    <h1>Wario Pub</h1>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+   
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-body">
+            <a href="index.html"><i class="fas fa-home icon-style"></i>Home</a>
+            <a href="Localizacao.html"><i class="fas fa-map-marker-alt icon-style"></i>Localização</a>
+            <a href="SobreNos.html"><i class="fas fa-users icon-style mb-3"></i>Sobre Nós</a>
+            <a href="Eventos.html"><i class="fas fa-calendar-alt icon-style"></i>Eventos</a>
+            <a href="informacoes.html"><i class="fas fa-info-circle icon-style"></i>Informações</a>
+            <a href="Promcoes.html"><i class="fas fa-tags icon-style"></i>Promoções</a>
+            <a href="Cardapio.html"><i class="fas fa-utensils icon-style"></i>Cardápio</a>
+            <a href="Reservas.html"><i class="fas fa-bookmark icon-style"></i>Reservas</a>
+            <a href="Contato.html"><i class="fas fa-phone icon icon-style"></i>Contato</a>
+            
+            <div class="col-md-6">
+                <img src="assets/IMG/wario_coins.png" alt="Imagem do Wario" class="imagem-sobreposta img-fluid">
+            </div>    
+        </div>
+    </div>
+
+    <!-- Conteúdo da Página Inicial -->
+    <main class="container mt-5">
+        <!-- Seção de Boas-vindas -->
+        <section class="text-center my-5">
+            <h1 class="display-2 fw-bold">Bem-vindo ao Wario Pub!</h1>
+            <p class="fs-3">Onde o caos e a diversão se encontram em um só lugar. Aproveite uma experiência única com bebidas incríveis, um ambiente vibrante e, claro, muita diversão ao estilo Wario!</p>
+        </section>
+
+        <!-- IMG -->
+        <section class="row justify-content-center my-4">
+            <div class="col-md-4 text-center img-backgrounds">
+                <img src="assets/IMG/latest.png" alt="Aniversário no Pub" class="img-fluid rounded">
+            </div>            
+        </section>
+        
+    <!-- Seção de Promoções -->
+    <section class="text-center my-5">
+        <h2 class="section-title">Promoções Imperdíveis</h2>
+        <p class="fs-3">Aproveite nossas promoções especiais para drinks e petiscos. Só no Wario Pub você encontra as melhores ofertas e, claro, a energia caótica do nosso querido Wario!</p>
+        <div class="row mt-4 bg-yellow">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="assets/IMG/3noalcol.png" class="card-img-top" alt="Drink Promo">
+                    <div class="card-body">
+                        <h1 class="card-title">Drink da Semana</h5>
+                        <p class="card-text">Um drink novo a cada semana! Sabores únicos para você experimentar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="assets/IMG/comidas.png" class="card-img-top" alt="Food Promo">
+                    <div class="card-body">
+                        <h1 class="card-title">Petiscos em Dobro</h5>
+                        <p class="card-text">Petiscos em dobro para compartilhar! Mais sabor e diversão esperando por você.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="assets/IMG/3bebidas.png" class="card-img-top" alt="Happy Hour">
+                    <div class="card-body">
+                        <h1 class="card-title">Happy Hour</h5>
+                        <p class="card-text">Descontos especiais no nosso Happy Hour! A melhor hora para relaxar e curtir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+        
+    </main>
+    <!-- Rodapé -->
+    <footer class="text-center">
+        <p>&copy; 2024 Wario Pub. Todos os direitos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

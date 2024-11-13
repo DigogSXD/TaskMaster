@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wario Pub</title>
+    <link rel="icon" href="assets/IMG/favicon.jpg" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/CSS/Cardapio.css"> <!-- CSS Principal -->
+</head>
+<body>
+    <!-- Navbar com offcanvas -->
+    <nav class="navbar navbar-light">
+        <div class="container-fluid">
+            <div class="navbar-content d-flex align-items-center">
+                <img src="assets/IMG/latest.webp" alt="Imagem sobreposta" class="imagem-sobreposta img-fluid">
+                <div class="Cardapio">
+                    <h1>Cardápio</h1>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-body">
+            <a href="index.html"><i class="fas fa-home icon-style"></i>Home</a>
+            <a href="Localizacao.html"><i class="fas fa-map-marker-alt icon-style"></i>Localização</a>
+            <a href="SobreNos.html"><i class="fas fa-users icon-style mb-3"></i>Sobre Nós</a>
+            <a href="Eventos.html"><i class="fas fa-calendar-alt icon-style"></i>Eventos</a>
+            <a href="informacoes.html"><i class="fas fa-info-circle icon-style"></i>Informações</a>
+            <a href="Promcoes.html"><i class="fas fa-tags icon-style"></i>Promoções</a>
+            <a href="Cardapio.html"><i class="fas fa-utensils icon-style"></i>Cardápio</a>
+            <a href="Reservas.html"><i class="fas fa-bookmark icon-style"></i>Reservas</a>
+            <a href="Contato.html"><i class="fas fa-phone icon icon-style"></i>Contato</a>
+            
+            <div class="col-md-6">
+                <img src="assets/IMG/wario_coins.png" alt="Imagem do Wario" class="imagem-sobreposta img-fluid">
+            </div>    
+        </div>
+    </div>
+    <!-- Conteúdo da página -->
+    <main class="container py-5 mt-5">
+        <section class="menu-cardapio">
+        <div class="text-center mb-5">
+            <h1 class="display-4 title">Cardápio Wario</h1>
+            <p class="established">Est. 2024</p>
+        </div>
+
+        
+        <!-- Sessões cervejas -->
+            <div class="text-center">
+            <h2 class="section-title">Cervejas</h2>
+            <img class="menu-icon mb-3" src="assets/IMG/icone-cerveja.png" alt="Ícone de Soda Italiana" style="width: 100px;">
+        </div>
+            <div class="list-group mb-4">
+                <div class="list-group-item d-flex justify-content-between"><span>Heineken Long Neck</span> <span>R$ 11,90</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Heineken 600 ml</span> <span>R$ 16,50</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Original</span> <span>R$ 13,00</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Serramalte</span> <span>R$ 13,00</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Chopp Brahma</span> <span>R$ 11,50</span>
+            </div>
+        
+
+        <!-- Sessões do Soda Italiana -->
+        <section class="mb-5">
+            <div class="text-center">
+            <h2 class="section-title">Soda Italiana</h2>
+            <img class="menu-icon mb-3" src="assets/IMG/icone-soda.png" alt="Ícone de Soda Italiana" style="width: 100px;">
+            <p class="text-ingr">Morango, maçã verde, limão siciliano e tangerina</p>
+            <div class="list-group">
+                </div>
+                <div class="list-group-item d-flex justify-content-between"><span>Água c/ gás e xarope de fruta</span> <span>R$ 12,00</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Água c/ gás xarope de fruta e vodka</span> <span>R$ 19,00</span>
+            </div>
+
+            
+         <!-- Seção de Caipirinhas -->
+         <section class="mb-5">
+            <div class="text-center">
+            <h2 class="section-title">Caipirinhas</h2>
+            <img class="menu-icon mb-3" src="assets/IMG/icone-caipirinhas.png" alt="Ícone de Caipirinhas" style="width: 100px;">
+            <p class="text-ingr">Limão, abacaxi, morango, kiwi, maracujá ou mista</p>
+        </div>
+            <div class="list-group">
+                <div class="list-group-item d-flex justify-content-between"><span>Absolut</span> <span>R$ 24,00</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Smirnoff</span> <span>R$ 19,90</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Cachaça</span> <span>R$ 19,90</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Rum</span> <span>R$ 19,90</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Saque</span> <span>R$ 19,90</span></div>
+                <div class="list-group-item d-flex justify-content-between"><span>Vinho</span> <span>R$ 19,90</span></div>
+            </div>
+
+
+             <!-- Seção de Sucos -->
+            <section class="menu-item mb-5">
+                <div class="text-center">
+                    <h2 class="section-title">Sucos</h2>
+                    <h5 class="text-ingr">Naturais</h5>
+                    <img class="menu-icon mb-3" src="assets/IMG/icon-Juice.png" alt="Ícone de Sucos" style="width: 100px;">
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Morango</span>
+                        <span>R$ 7,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Maracujá</span>
+                        <span>R$ 7,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Laranja</span>
+                        <span>R$ 10,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Uva</span>
+                        <span>R$ 10,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Abacaxi</span>
+                        <span>R$ 10,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Abacaxi + Hortelã</span>
+                        <span>R$ 12,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Abacaxi + Morango</span>
+                        <span>R$ 12,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Tamarindo</span>
+                        <span>R$ 12,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Limão</span>
+                        <span>R$ 7,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Cenoura + Beterraba + Laranja</span>
+                        <span>R$ 12,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Melão</span>
+                        <span>R$ 10,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Melancia</span>
+                        <span>R$ 10,00</span>
+                    </div>
+                </div>
+
+
+            <!-- Seção de Doses -->
+            <section class="menu-item mb-5">
+                <div class="text-center">
+                    <h2 class="section-title">Doses</h2>
+                    <img class="menu-icon mb-3" src="assets/IMG/icone-doses.png" alt="Ícone de Doses" style="width: 100px;">
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Campari</span>
+                        <span>R$ 11,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Saque</span>
+                        <span>R$ 16,50</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Vodka Absolut</span>
+                        <span>R$ 13,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Vodka Smirnoff</span>
+                        <span>R$ 13,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Whisk 8 anos</span>
+                        <span>R$ 11,50</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Whisk 12 anos</span>
+                        <span>R$ 24,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Cachaça Seleta</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Cachaça Boazinha</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Gin Tradicional</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Gin Tanqueray</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Rum</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Amarula</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Taça de Vinho</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Garrafa de Vinho</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Garrafa de Rum</span>
+                        <span>R$ 19,90</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Garrafa de Saque</span>
+                        <span>R$ 19,90</span>
+                    </div>
+
+
+            <!-- Seção de Porções -->
+            <section class="menu-item mb-5">
+                <div class="text-center">
+                    <h2 class="section-title">Porções</h2>
+                    <img class="menu-icon mb-3" src="assets/IMG/icone-porcao.png" alt="Ícone de Porções" style="width: 100px ;">
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Batata (Pequeno)</span>
+                        <span>R$ 27,50</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Batata (Grande)</span>
+                        <span>R$ 55,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Picanha (Pequeno)</span>
+                        <span>R$ 58,75</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Picanha (Grande)</span>
+                        <span>R$ 117,50</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Camarão Alho e Óleo (Pequeno)</span>
+                        <span>R$ 38,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Camarão Alho e Óleo (Grande)</span>
+                        <span>R$ 76,00</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Camarão Empanado (Pequeno)</span>
+                        <span>R$ 42,50</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between">
+                        <span>Camarão Empanado (Grande)</span>
+                        <span>R$ 85,00</span>
+                </div> 
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Rodapé -->
+    <footer class="text-center p-3 mt-5">
+        <p>&copy; 2024 Wario Pub. Todos os direitos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

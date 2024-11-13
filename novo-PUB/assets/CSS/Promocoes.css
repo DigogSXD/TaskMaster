@@ -1,0 +1,135 @@
+/* Estilos personalizados */
+body {
+    background-color: #3D1A54;
+    color: #FFD700;
+    font-family: Arial, sans-serif;
+    padding-top: 70px; /* Espaço para compensar a navbar fixa */
+}
+
+.Promcoes {
+    font-family:sans-serif; /* Fonte  */
+    font-size: clamp(1.0rem, 5vw, 3rem); /* Tamanho responsivo */
+    font-weight: bold;
+    color: white; /* Cor do texto */
+    text-shadow: 2px 2px 0px #9d00ff; /* Primeira sombra */
+    display: flex;
+    align-items: center;
+}
+
+
+/* Cabeçalho claro fixo no topo */
+.navbar {
+    background-color: #FFD700;
+    color: #4B0082;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1050;
+    border-bottom: 4px solid #4B0082;
+}
+.navbar .navbar-brand, .navbar .nav-link {
+    color: #4B0082 !important;
+    font-size: 1.5rem;
+}
+.navbar .navbar-toggler {
+    color: #FFD700;
+    border-color: #FFD700;
+    margin-left: 10px;
+}
+
+/* Container flexível para o nome e o botão de menu */
+.navbar .navbar-content {
+    display: flex;
+    align-items: center;
+}
+
+/* Ajuste para a imagem do logo */
+.imagem-sobreposta {
+    width: 150px;
+    height: auto;
+    max-width: 60px;
+    margin-right: 0px;
+}
+
+/* Menu lateral escuro */
+.offcanvas {
+    background-color: #4B0082; /* Cor escura para o menu */
+    color: #FFF;
+    margin-top: 78px;
+    transform: translateX(-100%); /* Mova  tela para fora  */
+    transition: transform 1.5s ease; /* Adiciona a transição */
+}
+
+/* Quando o offcanvas está ativo */
+.offcanvas.show {
+    transform: translateX(0); /* Volta para a posição original */
+    visibility: visible; /* Torna o offcanvas visível quando estiver aberto */
+    transform: translateX(-100%);/* Mova  tela para dentro  */
+    transition: transform 1.5s ease; /* Adiciona a transição */
+    
+}
+
+.offcanvas-header {
+    background-color: #4B0082;
+    color: #FFD700;
+}
+.offcanvas-body a {
+    color: #FFD700;
+    text-decoration: none;
+    display: block;
+    padding: 15px 0;
+    font-weight: bold;
+}
+.offcanvas-body a:hover {
+    background-color: #FFD700;
+    color: purple;
+}
+
+.offcanvas-body i {
+    margin-right: 15px; /* Espaço entre o ícone e o texto */
+    
+}
+
+.offcanvas-body a:hover i {
+    color: purple; /* Cor do ícone ao passar o mouse */
+}
+
+
+
+
+.section-title {
+    color: #FFD700;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+/* Rodapé */
+footer {
+    background-color: #FFD700;
+    color: #4B0082;
+    padding: 10px;
+}
+
+/* Ajuste para o menu lateral em telas menores */
+.offcanvas-body {
+    padding-top: 20px; /* Adiciona espaçamento no topo */
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo for muito grande */
+    max-height: 100vh; /* Limita a altura do menu para caber na tela */
+}
+
+@media (max-width: 768px) {
+    .offcanvas {
+        margin-top: 70px; /* Ajusta a margem para telas menores */
+    }
+    
+    /* Reduz o espaçamento entre os itens do menu */
+    .offcanvas-body a {
+        padding: 10px;
+        font-size: 1rem; /* Ajuste do tamanho da fonte */
+    }
+}
