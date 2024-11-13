@@ -16,11 +16,19 @@ def create_app():
     
     from .views import views
     from .auth import auth
-
+    from .checklist import checklist_bp
+    from .project import project
+    from .notificacoes import notificacoes
+    from .task import task
+    
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(checklist_bp, url_prefix='/')
+    app.register_blueprint(project, url_prefix='/')
+    app.register_blueprint(task, url_prefix='/')
+    app.register_blueprint(notificacoes, url_prefix='/')
 
-    from .models import Usuario, Project
+    from .models import Usuario, Project, Task, ChecklistItem, Notification
 
     create_db(app)
 

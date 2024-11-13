@@ -353,3 +353,40 @@ button:hover {
     text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
     color: #0c47a1; /* Cor mais escura ao passar o mouse */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contêiner para centralizar */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Ajuste o espaçamento superior conforme necessário */
+}
+
+/* Estilo para o botão de link */
+a.button-save {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1a73e8; /* Cor de fundo */
+    color: #fff; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    border-radius: 5px; /* Borda arredondada */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+a.button-save:hover {
+    background-color: #0c47a1; /* Cor de fundo ao passar o mouse */
+}
