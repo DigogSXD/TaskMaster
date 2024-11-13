@@ -14,12 +14,12 @@
         <div class="containerTask">
             <h1>TaskMaster</h1>
             <ul>
-                <li><a href="{{ url_for('project.home') }}">Home</a></li>
+                <li><a href="{{ url_for('auth.home') }}">Home</a></li>
                 <li><a href="{{ url_for('auth.sobre') }}">Sobre</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 <li>
                     <!-- NOTIFICAÇÃO para ficar mais facil -->
-                    <a href="{{ url_for('notificacoes.notifications') }}" class="notification-icon">
+                    <a href="{{ url_for('auth.notifications') }}" class="notification-icon">
                         🔔
                         <span class="notification-badge">3</span>
                     </a>

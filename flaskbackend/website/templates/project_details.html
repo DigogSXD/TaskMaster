@@ -30,11 +30,11 @@ TaskMaster - Gerenciamento de Tarefas
                     {% endif %}
                     
                     <!-- Botão para deletar -->
-                    <form method="POST" action="{{ url_for('task.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                     <!-- Botão de Checklist -->
-                    <form method="GET" action="{{ url_for('checklist_bp.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="checklist">Checklist</button>
                     </form>
                 </li>
@@ -42,7 +42,7 @@ TaskMaster - Gerenciamento de Tarefas
             </ul>
 
             <!-- Formulário para adicionar nova tarefa em Pré-requisitos -->
-            <form method="POST" action="{{ url_for('project.gerenciar_projeto', project_id=project.id) }}">
+            <form method="POST" action="{{ url_for('auth.gerenciar_projeto', project_id=project.id) }}">
                 <input type="text" name="task_name" placeholder="Nova tarefa" required>
                 <input type="hidden" name="task_status" value="Pré-requisitos">
                 
@@ -103,11 +103,11 @@ TaskMaster - Gerenciamento de Tarefas
                     {% if tarefa.drive_link %}
                     <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
                     {% endif %}
-                    <form method="POST" action="{{ url_for('task.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                     <!-- Botão de Checklist -->
-                    <form method="GET" action="{{ url_for('checklist_bp.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="checklist">Checklist</button>
                     </form>
                 </li>
@@ -133,11 +133,11 @@ TaskMaster - Gerenciamento de Tarefas
                     {% if tarefa.drive_link %}
                     <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
                     {% endif %}
-                    <form method="POST" action="{{ url_for('task.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
                     </form>
                     <!-- Botão de Checklist -->
-                    <form method="GET" action="{{ url_for('checklist_bp.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
                         <button type="submit" id="checklist">Checklist</button>
                     </form>
                 </li>
@@ -149,7 +149,6 @@ TaskMaster - Gerenciamento de Tarefas
     <button id="SalvarProj">Salvar</button>
 
 
-
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='project_details.css') }}">
 {% endblock %}
@@ -157,5 +156,6 @@ TaskMaster - Gerenciamento de Tarefas
 {% block scripts %}
     <script src="{{ url_for('static', filename='project_details.js') }}"></script>
 {% endblock %}
+
 
 {% endblock %}

@@ -7,7 +7,7 @@ TaskMaster - Gerenciamento de Projetos
 {% block content %}
     <h2>Gerenciamento de Projetos</h2>
 
-    <form id="criarProjeto" method="POST" action="{{ url_for('project.adicionar_projeto') }}">
+    <form id="criarProjeto" method="POST" action="{{ url_for('auth.adicionar_projeto') }}">
         <input type="text" name="project_name" placeholder="Nome do Projeto" required>
         <button type="submit">Criar Projeto</button>
     </form>
@@ -23,10 +23,10 @@ TaskMaster - Gerenciamento de Projetos
             <td>{{ projeto.nome_projeto }}</td>
             <td>
                 <a href="/projeto/{{ projeto.id }}" class="btn btn-primary">Gerenciar</a>
-                <a href="{{ url_for('project.editar_projeto', project_id=projeto.id) }}" class="btn btn-warning">Editar</a>
+                <a href="{{ url_for('auth.editar_projeto', project_id=projeto.id) }}" class="btn btn-warning">Editar</a>
             
                 <!-- Formulário para deletar projeto via POST -->
-                <form method="POST" action="{{ url_for('project.deletar_projeto', project_id=projeto.id) }}" style="display:inline;">
+                <form method="POST" action="{{ url_for('auth.deletar_projeto', project_id=projeto.id) }}" style="display:inline;">
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar este projeto?');">Deletar</button>
                 </form>
             
@@ -35,7 +35,7 @@ TaskMaster - Gerenciamento de Projetos
 
                 <!-- Formulário de compartilhamento escondido -->
                 <div id="compartilhar-form-{{ projeto.id }}" style="display:none; margin-top: 10px;">
-                    <form method="POST" action="{{ url_for('project.compartilhar_projeto', project_id=projeto.id) }}">
+                    <form method="POST" action="{{ url_for('auth.compartilhar_projeto', project_id=projeto.id) }}">
                         <input type="email" name="emailShare" placeholder="Digite o email" required style="padding: 5px; margin-right: 5px;">
                         <button type="submit" class="btn btn-envicom">Enviar</button>
                     </form>
