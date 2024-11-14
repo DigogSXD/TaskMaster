@@ -1,0 +1,143 @@
+body {
+
+    /*Define a fonte como arial ou qualquer fonte sans serif*/
+    font-family: Arial, sans-serif;
+
+    /*Imagem plano de fundo*/
+    background: url('login.jpg') no-repeat center fixed;
+
+    /*Preencher a tela inteira com a imagem de fundo*/
+    background-size: cover;
+    
+    /*Centralizando todo o conteúsdo verticalmente*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /*A altura do body é 100% da altura da janela do navegador*/
+    height: 100vh;
+
+    /*Remove as margens pra ocupar toda a tela*/
+    margin: 0;
+}
+
+.container{
+    width: 80%;
+
+/* 
+    Centralizou o formulário */
+    max-width: 400px;
+/* 
+    Cor de fundo do formulário é branca com 90% de transparência */
+    background-color: rgba(255,255,255,0.9);
+
+    /* Aumenta ou diminui a área branca do formulário */
+    padding: 20px;
+/* 
+    Adiciona uma sombra ao redor do formulario */
+    box-shadow:0 0 10px rgba(0,0,0,0.85);
+/* 
+    Arredonda as bordas do container com um raio de 8 pixels */
+    border-radius: 8px;
+
+}
+
+form{
+    display: flex;
+
+    /* Organiza os elementos do formulário um abaixo do outro(coluna) */
+    flex-direction: column;
+}
+
+h2{
+    /* Centralizando o texto */
+    text-align: center;
+/* 
+    Margem de baixo */
+    margin-bottom: 20px;
+}
+
+input{
+    /* Os campos de input ocupam 100% do formulário */
+    width: 100%;
+
+
+    padding: 10px;
+/* 
+    Inclui o padding e a borda no cálculo da largura */
+    box-sizing: border-box;
+/* 
+    Adiciona uma borda cinza claro aos campos de input */
+    border: 1px solid #ccc;
+
+/* 
+    Arredonda os cantos dos campos de input */
+    border-radius: 144px;
+}
+
+button{
+    padding: 10px;
+/* 
+    Cor do fundo do botão */
+    background-color: #007bff;
+/* 
+    Cor das letras */
+    color: white;
+/* 
+    Sem borda nos botão */
+    border: none;
+
+    border-radius: 11px;
+/* 
+    Aparece a maozinha qunado passa o mouse em cima */
+    cursor: pointer;
+
+
+    transition: background-color 0.3s;
+
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: none; /* Remove o sublinhado */
+    font-size: 16px;
+}
+
+/* 
+DEIXA O BOTÃO MAIS ESCURO QUANDO PASSA POR CIMA DELE */
+button:hover {
+    background-color: #0056b3;
+}
+a.btn {
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #6c757d; /* cor do botão secundário */
+    border: none;
+    border-radius: 11px;
+    text-align: center;
+    text-decoration: none; /* Remove o sublinhado */
+    font-size: 16px;
+}
+
+a.btn:hover {
+    background-color: #5a6268; /* Cor mais escura ao passar o mouse */
+}
+
+button[type="button"]{
+    background-color: #6c757d;
+
+}
+
+button[type=button]:hover{
+    background-color: #5a6268;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adiciona espaçamento vertical entre os itens */
+}
+
+

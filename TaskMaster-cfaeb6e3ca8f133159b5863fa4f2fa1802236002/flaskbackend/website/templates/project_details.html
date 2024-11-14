@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}
+TaskMaster - Gerenciamento de Tarefas
+{% endblock %}
+
+{% block content %}
+    <h2>Projeto: {{ project.nome_projeto }}</h2>
+
+    <div class="kanban-board">
+        <!-- Coluna Pré-requisitos -->
+        <div class="kanban-column">
+            <h3>Pré-requisitos</h3>
+            <ul id="prerequisites" class="kanban-list" ondrop="drop(event, 'Pré-requisitos')" ondragover="allowDrop(event)">
+                <!-- Renderizar tarefas pré-requisitos -->
+                {% for tarefa in prereq_tasks %}
+                <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
+                    {{ tarefa.description }}
+                    {% if tarefa.completion_date %}
+                        <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                    {% endif %}
+
+                    {% if tarefa.comment %}
+                        <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+
+                    <!-- Exibir o link se disponível -->
+                    {% if tarefa.drive_link %}
+                    <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
+                    {% endif %}
+                    
+                    <!-- Botão para deletar -->
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                    </form>
+                    <!-- Botão de Checklist -->
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="checklist">Checklist</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Formulário para adicionar nova tarefa em Pré-requisitos -->
+            <form method="POST" action="{{ url_for('auth.gerenciar_projeto', project_id=project.id) }}">
+                <input type="text" name="task_name" placeholder="Nova tarefa" required>
+                <input type="hidden" name="task_status" value="Pré-requisitos">
+                
+                <!-- Seleção de Importância com Botões Coloridos -->
+                <label for="importance">Importância:</label>
+                <div class="selection-buttons" id="importance-buttons">
+                    <button type="button" class="importance-btn low" data-value="1">1</button>
+                    <button type="button" class="importance-btn medium" data-value="3">3</button>
+                    <button type="button" class="importance-btn high" data-value="5">5</button>
+                    <button type="button" class="importance-btn very-high" data-value="8">8</button>
+                    <button type="button" class="importance-btn max" data-value="13">13</button>
+                </div>
+                <input type="hidden" name="importance" id="importance" required>
+            
+                <!-- Seleção de Facilidade com Botões Coloridos -->
+                <label for="ease">Facilidade:</label>
+                <div class="selection-buttons" id="ease-buttons">
+                    <button type="button" class="ease-btn low" data-value="1">1</button>
+                    <button type="button" class="ease-btn medium" data-value="3">3</button>
+                    <button type="button" class="ease-btn high" data-value="5">5</button>
+                    <button type="button" class="ease-btn very-high" data-value="8">8</button>
+                    <button type="button" class="ease-btn max" data-value="13">13</button>
+                </div>
+                <input type="hidden" name="ease" id="ease" required>
+            
+                <!-- Campo para Data de Conclusão -->
+                <label for="completion_date" class="form-label">Data de Conclusão:</label>
+                <input type="date" name="completion_date" id="completion_date" class="form-control" required>
+
+                <!-- Campo para Comentário -->
+                <label for="comment" class="form-label">Comentário:</label>
+                <textarea name="comment" id="comment" class="form-control" placeholder="Adicione um comentário..." required></textarea>
+            
+
+                <!-- Novo campo para link do Google Drive -->
+                <label for="drive_link" class="form-label">Link do arquivo</label>
+                <input type="url" name="drive_link" id="drive_link" class="form-control" placeholder="Insira o link">
+
+                <button type="submit">Adicionar</button>
+            </form>
+        </div>
+
+        <!-- Coluna Em Produção -->
+        <div class="kanban-column">
+            <h3>Em Produção</h3>
+            <ul id="inProduction" class="kanban-list" ondrop="drop(event, 'Em Produção')" ondragover="allowDrop(event)">
+                {% for tarefa in in_prod_tasks %}
+                <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
+                    {{ tarefa.description }}
+                    {% if tarefa.completion_date %}
+                        <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                    {% endif %}
+                    {% if tarefa.comment %}
+                        <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+
+                    <!-- Exibir o link se disponível -->
+                    {% if tarefa.drive_link %}
+                    <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                    </form>
+                    <!-- Botão de Checklist -->
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="checklist">Checklist</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Coluna Concluído -->
+        <div class="kanban-column">
+            <h3>Concluído</h3>
+            <ul id="completed" class="kanban-list" ondrop="drop(event, 'Concluído')" ondragover="allowDrop(event)">
+                {% for tarefa in completed_tasks %}
+                <li id="{{ tarefa.id_task }}" draggable="true" ondragstart="drag(event)">
+                    {{ tarefa.description }}
+                    {% if tarefa.completion_date %}
+                        <span class="completion">Conclusão: {{ tarefa.completion_date.strftime('%d/%m/%Y') }}</span>
+                    {% endif %}
+                    {% if tarefa.comment %}
+                        <span class="comment">Comentário: {{ tarefa.comment }}</span>
+                    {% endif %}
+
+                    <!-- Exibir o link se disponível -->
+                    {% if tarefa.drive_link %}
+                    <span class="drive-link">Link: <a href="{{ tarefa.drive_link }}" target="_blank">Arquivo</a></span>
+                    {% endif %}
+                    <form method="POST" action="{{ url_for('auth.deletar_tarefa', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="deletar" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Deletar</button>
+                    </form>
+                    <!-- Botão de Checklist -->
+                    <form method="GET" action="{{ url_for('auth.checklist', task_id=tarefa.id_task, project_id=project.id) }}" style="display:inline;">
+                        <button type="submit" id="checklist">Checklist</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <button id="SalvarProj">Salvar</button>
+
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='project_details.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='project_details.js') }}"></script>
+{% endblock %}
